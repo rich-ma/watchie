@@ -1,0 +1,33 @@
+{
+  "name": "watchie",
+  "version": "1.0.0",
+  "description": "Watchie is always watching",
+  "main": "app.js",
+  "scripts": {
+    "server": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rich-ma/watchie.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rich-ma/watchie/issues"
+  },
+  "homepage": "https://github.com/rich-ma/watchie#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.10",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
