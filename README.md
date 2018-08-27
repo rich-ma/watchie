@@ -1,7 +1,7 @@
-# Pushie
+# Watchie
  
 ## Background and Overview
-Pushie is a mobile application that will provide users with information about their time management. Every 30 minutes, users will receive push notifications asking for their current or nearby location. At any point, users can view a Google map displaying information about how they have been spending their time.
+Watchie is a mobile application that will provide users with information about their time management. Every 30 minutes, users will receive push notifications asking for their current or nearby location. At any point, users can view a Google map displaying information about how they have been spending their time.
  
 ## Functionality and MVP
 - [ ] Users can receive push notifications, which users can then act upon
