@@ -56,7 +56,16 @@ router.patch('/:id', (req, res) => {
 
 //user show page
 router.get('/:id', (req, res) => {
-
+  User.findById(req.params.id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({
+          email: 'This user does not exist'
+        });
+      } else {
+        res.json(user); //???
+      }
+    })
 });
 
 module.exports = router;
