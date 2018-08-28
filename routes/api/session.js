@@ -7,6 +7,7 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateLoginInput = require('../../validation/login');
 
+//retrieve current user info
 router.get('/', passport.authenticate('jwt', {
   session: false
 }), (req, res) => {
@@ -17,7 +18,7 @@ router.get('/', passport.authenticate('jwt', {
   });
 });
 
-//create new session
+//login
 router.post('/', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
@@ -56,6 +57,11 @@ router.post('/', (req, res) => {
           }
         });
     });
+});
+
+//logout
+router.delete('/', (req, res) => {
+
 });
 
 module.exports = router;

@@ -40,4 +40,14 @@ router.post('/', (req, res) => {
     });
 });
 
+//edit a user
+router.patch('/:id', (req, res) => {
+
+});
+
+//user show page
+router.get('/:id', (req, res) => {
+  
+});
+
 module.exports = router;
