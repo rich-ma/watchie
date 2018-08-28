@@ -4,8 +4,9 @@
   "description": "Watchie is always watching",
   "main": "app.js",
   "scripts": {
+    "build": "webpack --watch",
     "server": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node --inspect app.js"
   },
   "repository": {
     "type": "git",
