@@ -5,22 +5,8 @@ const User = require('../../models/User');
 const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 
-router.get("/test", (req, res) => res.json({
-  msg: "This is the users route"
-}));
-
-router.get('/current', passport.authenticate('jwt', {
-  session: false
-}), (req, res) => {
-  res.json({
-    id: req.user.id,
-    fname: req.user.fname,
-    email: req.user.email,
-  });
-});
-
 //register new user
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
    if (!isValid) {
