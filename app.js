@@ -34,9 +34,9 @@ app.use("/api/session", session);
 app.use("/api/users", users);
 app.use("/api/push", push);
 
-const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
-const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
-webpush.setVapidDetails('mailto:stevielum1@gmail.com', publicVapidKey, privateVapidKey);
+// const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
+// const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
+// webpush.setVapidDetails('mailto:stevielum1@gmail.com', publicVapidKey, privateVapidKey);
 
 const port = process.env.PORT || 8001;
 
