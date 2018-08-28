@@ -4,7 +4,6 @@ const Location = require('../../models/Location');
 
 //new location
 router.post('/', (req, res) => {
-
   Location.findOne({
       name: req.body.name,
       latitude: req.body.latitude,
@@ -31,3 +30,33 @@ router.post('/', (req, res) => {
       }
     })
 })
+
+router.get('/:id', (req, res) => {
+  Location.findById(req.params.id)
+    .then(location => {
+      if (!location) {
+        return res.status(404).json({
+          email: 'This location does not exist'
+        });
+      } else {
+        res.json(location); 
+      }
+    })
+})
+
+router.patch('/:id', (req, res) => {
+  Location.findById(req.params.id)
+    .then(location => {
+      if (!location) {
+        return res.status(404).json({
+          email: 'This location does not exist'
+        });
+      } else {
+        location.name = req.body.name;
+        location.save();
+      }
+    });
+})
+
+
+module.exports = router;

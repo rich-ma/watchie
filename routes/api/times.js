@@ -25,3 +25,33 @@ router.post('/', (req, res) => {
       }
     })
 })
+
+router.get('/:id', (req, res) => {
+  Time.findById(req.params.id)
+    .then(time => {
+      if (!time) {
+        return res.status(404).json({
+          email: 'This time does not exist'
+        });
+      } else {
+        res.json(time); 
+      }
+    })
+})
+
+router.patch('/:id', (req, res) => {
+  Time.findById(req.params.id)
+    .then(time => {
+      if (!time) {
+        return res.status(404).json({
+          email: 'This time connection does not exist'
+        });
+      } else {
+        time.duration = req.body.duration;
+        time.save();
+      }
+    });
+})
+
+
+module.exports = router;

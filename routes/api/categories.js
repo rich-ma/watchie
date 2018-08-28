@@ -25,7 +25,32 @@ router.post('/', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
-  Category.findById
-
-
+  Category.findById(req.params.id)
+    .then(category => {
+      if (!category) {
+        return res.status(404).json({
+          email: 'This category connection does not exist'
+        });
+      } else {
+        category.type = req.body.type;
+        category.save();
+      }
+    });
 })
+
+router.get('/:id', (req, res) => {
+  Category.findById(req.params.id)
+    .then(category => {
+      if (!category) {
+        return res.status(404).json({
+          email: 'This category does not exist'
+        });
+      } else {
+        res.json(category); //???
+      }
+    })
+})
+
+
+
+module.exports = router;
