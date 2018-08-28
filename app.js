@@ -5,10 +5,12 @@ const path = require("path");
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const session = require("./routes/api/session");
+const push = require("./routes/api/push");
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const webpush = require('web-push');
 
-mongoose.connect(db)
+mongoose.connect(db, {useNewUrlParser: true})
 .then(() => console.log("Connected to MongoDB successfully"))
 .catch(err => console.log(err));
 
@@ -30,6 +32,11 @@ app.use(express.static('frontend'));
 
 app.use("/api/session", session);
 app.use("/api/users", users);
+app.use("/api/push", push);
+
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
+const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
+webpush.setVapidDetails('mailto:stevielum1@gmail.com', publicVapidKey, privateVapidKey);
 
 const port = process.env.PORT || 8001;
 
