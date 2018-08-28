@@ -42,12 +42,21 @@ router.post('/', (req, res) => {
 
 //edit a user
 router.patch('/:id', (req, res) => {
-
+  User.findById(req.params.id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({email: 'This user does not exist' });
+      } else {
+        user.fname = req.body.fname;
+        user.lname = req.body.lname;
+        user.save();
+      }
+    });
 });
 
 //user show page
 router.get('/:id', (req, res) => {
-  
+
 });
 
 module.exports = router;

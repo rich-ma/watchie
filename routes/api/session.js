@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
 
 //logout
 router.delete('/', (req, res) => {
-
+  
 });
 
 module.exports = router;
