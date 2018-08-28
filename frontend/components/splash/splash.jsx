@@ -1,9 +1,17 @@
 import React from "react";
+import Button from '@material-ui/core/Button';
 
 const splash = () => {
     return (
         <div className="splash">
-            <h1>This is the splash page</h1>
+            <img className="logo-img" src={'./images/clockpng.png'} />
+            <h1>Watchie</h1>
+            <Button variant="outlined" color="secondary" >
+                Sign Up
+            </Button>
+            <Button variant="outlined" color="secondary" >
+                Log In
+            </Button>
         </div>
     );
 };

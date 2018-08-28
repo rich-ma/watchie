@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.logo-img {
+    /* background-image: url(../images/clockpng.png);
+    background-size: 100%; */
+    width: 200px;
+    height: 200px;
+}
+
+.splash {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
