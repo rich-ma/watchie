@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const config = {
   entry: './frontend/index.jsx',
   output: {
-    filename: 'bundle.js',
+    filename: './frontend/js/bundle.js',
     path: path.join(__dirname)
   },
   resolve: {

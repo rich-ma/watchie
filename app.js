@@ -15,7 +15,7 @@ mongoose.connect(db)
 
 // app.get("/", (req, res) => res.send("Hello Nigel"));
 app.get("/", (request, res) => {
-  res.sendFile(path.join(__dirname, "./index.html"));
+  res.sendFile(path.join(__dirname, "./frontend/index.html"));
 });
 
 app.use(bodyParser.urlencoded({
@@ -25,6 +25,8 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
+
+app.use(express.static('frontend'));
 
 app.use("/api/session", session);
 app.use("/api/users", users);
