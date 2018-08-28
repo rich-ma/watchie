@@ -7,6 +7,23 @@ const config = {
     filename: 'bundle.js',
     path: path.join(__dirname)
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '*']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          query: {
+            presets: ['env', 'react']
+          }
+        },
+      }
+    ]
+  },
   plugins: [
     new webpack.ProgressPlugin()
   ],

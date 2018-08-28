@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const app = express();
+const path = require("path");
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const session = require("./routes/api/session");
@@ -12,7 +13,10 @@ mongoose.connect(db)
 .catch(err => console.log(err));
 
 
-app.get("/", (req, res) => res.send("Hello Nigel"));
+// app.get("/", (req, res) => res.send("Hello Nigel"));
+app.get("/", (request, res) => {
+  res.sendFile(path.join(__dirname, "./index.html"));
+});
 
 app.use(bodyParser.urlencoded({
   extended: false
