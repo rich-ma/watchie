@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import Splash from './splash/splash';
+import Navbar from './navbar/navbar';
 import DashboardContainer from './dashboard/dashboard_container';
 import MapContainer from './map/map_container.js';
 import HistoryContainer from './history/history_container.js';
@@ -8,6 +9,7 @@ import LocationContainer from './location/location_container.js';
 
 const App = () => (
   <div>
+    <Navbar />
 
     <Switch>
       {/* <MuiThemeProvider theme={theme}> */}
