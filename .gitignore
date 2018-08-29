@@ -1,6 +1,7 @@
 
 /config/keys.js
 /frontend/node_modules
+/frontend/src/config/keys.js
 /node_modules
 bundle.js
 bundle.js.map
