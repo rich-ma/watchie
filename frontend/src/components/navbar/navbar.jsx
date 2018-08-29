@@ -1,12 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
+import { List, Button } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
+import { withStyles } from '@material-ui/core/styles';
 
 import SideMenu from './side_menu';
 
@@ -30,8 +32,6 @@ class Navbar extends React.Component {
       <div>
         <h1>fname</h1>
         <List><SideMenu /></List>
-        <Divider />
-        <List></List>
       </div>
     );
 
@@ -47,14 +47,28 @@ class Navbar extends React.Component {
       </Drawer>
     );
 
+    const navMenu = (
+      <ul className={this.props.classes.menu}>
+        <Link to="/dashboard" className={this.props.classes.link}>
+          <Button className={this.props.classes.button}>Dashboard</Button>
+        </Link>
+        <Link to="/map" className={this.props.classes.link}>
+          <Button className={this.props.classes.button}>Map</Button>
+        </Link>
+        <Link to="/history" className={this.props.classes.link}>
+          <Button className={this.props.classes.button}>History</Button>
+        </Link>
+      </ul>
+    );
+
     return (
       <div>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar className={this.props.classes.toolbar} >
             <Typography variant="title" color="inherit">
-              News
             </Typography>
-            <IconButton color="inherit" aria-label="Menu">
+            {navMenu}
+            <IconButton className={this.props.classes.hamburger} color="inherit" aria-label="Menu" >
               <MenuIcon onClick={() => this.toggleDrawer('right', true)}/>
             </IconButton>
           </Toolbar>
@@ -65,4 +79,33 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+const styles = theme => ({
+  toolbar: {
+    "display": "flex",
+    "justify-content": "space-between",
+    [theme.breakpoints.up('sm')]: {
+      "justify-content": "flex-start"
+    }
+  },
+  hamburger: {
+    "display": "block",
+    [theme.breakpoints.up('sm')]: {
+      "display": "none"
+    }
+  },
+  menu: {
+    "list-style": "none",
+    "display": "none",
+    [theme.breakpoints.up('sm')]: {
+      "display": "flex"
+    }
+  },
+  link: {
+    "text-decoration": "none",
+  },
+  button: {
+    "color": "white"
+  }
+});
+
+export default withStyles(styles)(Navbar);
