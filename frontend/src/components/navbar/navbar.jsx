@@ -28,8 +28,8 @@ class Navbar extends React.Component {
   render() {
     const sideList = (
       <div>
-        <h1>STUFF</h1>
-        <List>{SideMenu}</List>
+        <h1>fname</h1>
+        <List><SideMenu /></List>
         <Divider />
         <List></List>
       </div>
