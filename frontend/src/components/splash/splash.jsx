@@ -4,18 +4,18 @@ import Button from '@material-ui/core/Button';
 const splash = () => {
     return (
         <div className="splash">
+            <br />
             <img className="logo-img" src={'./images/clockpng.png'} />
-            <br/>
             <h1>Watchie</h1>
-            <br/>
+            <br />
             <Button variant="outlined" color="secondary" >
                 Sign Up
             </Button>
-            <br/>
+            <br />
             <Button variant="outlined" color="secondary" >
                 Log In
             </Button>
-            <br/>
+            <br />
             <Button variant="outlined" color="secondary" >
                 Demo User
             </Button>
