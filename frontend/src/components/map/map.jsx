@@ -19,14 +19,16 @@ class Map extends React.Component {
             <div className="map">
                 <h1>This is the map</h1>
                 <br />
-                <div className="map-item">
+                <div className="map-button">
                     <Link className="Link" to="/location">
                         <Button variant="outlined" color="secondary" >
                             MAP
                         </Button>
                     </Link>
                 </div>
+                <div className="map-item">
                 <MapItemContainer />
+                </div>
             </div>
         );
     }
