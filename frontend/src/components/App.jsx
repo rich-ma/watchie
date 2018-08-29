@@ -1,14 +1,16 @@
-import React from "react";
+import React from 'react';
 import { Route, Redirect, Switch, Link, HashRouter } from "react-router-dom";
 import Splash from './splash/splash';
 
 const App = () => (
-    <div>
-  
-      <Switch>
+  <div>
+
+    <Switch>
+      {/* <MuiThemeProvider theme={theme}> */}
         <Route exact path="/" component={Splash} />
-      </Switch>
-    </div>
-  );
-  
-  export default App;
+      {/* </MuiThemeProvider> */}
+    </Switch>
+  </div>
+);
+
+export default App;

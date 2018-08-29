@@ -6,7 +6,10 @@
   "scripts": {
     "build": "webpack --mode=development --watch",
     "server": "nodemon app.js",
-    "start": "node --inspect app.js"
+    "start": "node --inspect app.js",
+    "frontend-install": "npm install --prefix frontend",
+    "frontend": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run frontend\""
   },
   "repository": {
     "type": "git",
@@ -19,17 +22,14 @@
   },
   "homepage": "https://github.com/rich-ma/watchie#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.2.0",
-    "animate.css": "^3.7.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
+    "material-colors": "^1.2.6",
+    "material-ui": "^0.20.2",
     "mongoose": "^5.2.10",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",

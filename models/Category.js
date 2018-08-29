@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const UserSchema = require('./User');
-const LocationSchema = require('./Location');
 
 const CategorySchema = new Schema({
   category: {
       type: String,
       required: true,
     },
-  locationId: LocationSchema,
-  userId: UserSchema, 
+    locationId: {
+      type: Schema.Types.ObjectId,
+      ref: 'locations'
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'users'
+    },
   date: {
     type: Date,
     default: Date.now,
