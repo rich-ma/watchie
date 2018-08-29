@@ -1,0 +1,17 @@
+.dashboard {
+    height: 100vh;
+}
+.dashboard-fromto {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 10vw;
+}
+.dashboard-date {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 10vw;
+}
+.dashboard img {
+    margin: 5px 10vw;
+    width: 80vw;
+}
