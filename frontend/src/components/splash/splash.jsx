@@ -1,5 +1,6 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
 
 const splash = () => {
     return (
@@ -12,9 +13,11 @@ const splash = () => {
                 Sign Up
             </Button>
             <br />
-            <Button variant="outlined" color="secondary" >
-                Log In
-            </Button>
+            <Link className="Link" to="/dashboard">
+                <Button variant="outlined" color="secondary" >
+                    Log In
+                </Button>
+            </Link>
             <br />
             <Button variant="outlined" color="secondary" >
                 Demo User
