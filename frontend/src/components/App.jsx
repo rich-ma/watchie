@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { ProtectedRoute, AuthRoute } from '../util/route_util';
 
 import Splash from './splash/splash';
-import Navbar from './navbar/navbar';
+import NavbarContainer from './navbar/navbar_container';
 import DashboardContainer from './dashboard/dashboard_container';
 import MapContainer from './map/map_container.js';
 import HistoryContainer from './history/history_container.js';
@@ -13,7 +13,7 @@ import SignupFormContainer from './session_form/signup_form_container';
 
 const App = () => (
   <div>
-    <Route path="/" component={Navbar} />
+    <Route path="/" component={NavbarContainer} />
 
     <Switch>
       {/* <MuiThemeProvider theme={theme}> */}
