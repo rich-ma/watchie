@@ -14,22 +14,22 @@ const LocationSchema = new Schema({
     type: Number,
     required: true,
   },
-  street: {
-    type: String,
-    required: true,
-  },
-  streetNumber: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  zipCode: {
-    type: String,
-    required: true,
-  },
+  // street: {
+  //   type: String,
+  //   required: true,
+  // },
+  // streetNumber: {
+  //   type: String,
+  //   required: true,
+  // },
+  // city: {
+  //   type: String,
+  //   required: true,
+  // },
+  // zipCode: {
+  //   type: String,
+  //   required: true,
+  // },
   date: {
     type: Date,
     default: Date.now,

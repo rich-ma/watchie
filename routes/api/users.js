@@ -73,7 +73,7 @@ router.get('/:id', (req, res) => {
           email: 'This user does not exist'
         });
       } else {
-        res.json(user); //???
+        res.json(user);
       }
     })
 });
