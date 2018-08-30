@@ -9,7 +9,7 @@ import LocationContainer from './location/location_container.js';
 
 const App = () => (
   <div>
-    <Navbar />
+    <Route path="/" component={Navbar} />
 
     <Switch>
       {/* <MuiThemeProvider theme={theme}> */}

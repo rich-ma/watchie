@@ -20,7 +20,7 @@ class SideMenu extends React.Component {
       <div>
         <List component="nav">
           <Link to="/dashboard"
-            className={this.props.classes.Link} >
+            className={this.props.classes.link} >
             <ListItem button>
               <ListItemIcon>
                 <DashboardIcon />
@@ -29,7 +29,7 @@ class SideMenu extends React.Component {
             </ListItem>
           </Link>
           <Link to="/map"
-            className={this.props.classes.Link} >
+            className={this.props.classes.link} >
             <ListItem button>
               <ListItemIcon>
                 <MapIcon />
@@ -38,7 +38,7 @@ class SideMenu extends React.Component {
             </ListItem>
           </Link>
           <Link to="/history"
-            className={this.props.classes.Link} >
+            className={this.props.classes.link} >
             <ListItem button>
               <ListItemIcon>
                 <HistoryIcon />

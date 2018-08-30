@@ -60,12 +60,14 @@ class Navbar extends React.Component {
         </Link>
       </ul>
     );
-
     return (
       <div>
-        <AppBar position="static">
+        <AppBar position="static" className={this.props.classes.container}>
           <Toolbar className={this.props.classes.toolbar} >
             <Typography variant="title" color="inherit">
+            <p className={this.props.classes.title}>
+            {this.props.location.pathname.slice(1)}
+            </p>
             </Typography>
             {navMenu}
             <IconButton className={this.props.classes.hamburger} color="inherit" aria-label="Menu" >
@@ -80,6 +82,18 @@ class Navbar extends React.Component {
 }
 
 const styles = theme => ({
+  container: {
+    "max-height": "56px",
+    "position": "fixed",
+    "width": "100%"
+  },
+  title: {
+    "text-transform": "capitalize",
+    "display": "block",
+    [theme.breakpoints.up('sm')]: {
+      "display": "none"
+    }
+  },
   toolbar: {
     "display": "flex",
     "justify-content": "space-between",
