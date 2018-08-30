@@ -2,6 +2,7 @@ import React from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class SessionForm extends React.Component {
           value={this.state.fname}
           onChange={this.handleInput('fname')}
           margin="normal"
+          className={this.props.classes.input}
         />
       );
       password2 = errors.join("").includes("Confirm Password") ? (
@@ -49,6 +51,7 @@ class SessionForm extends React.Component {
           type="password"
           onChange={this.handleInput('password2')}
           margin="normal"
+          className={this.props.classes.input}
         />
       ) : (
         <TextField
@@ -57,6 +60,7 @@ class SessionForm extends React.Component {
           type="password"
           onChange={this.handleInput('password2')}
           margin="normal"
+          className={this.props.classes.input}
         />
       );
     }
@@ -68,6 +72,7 @@ class SessionForm extends React.Component {
         value={this.state.email}
         onChange={this.handleInput('email')}
         margin="normal"
+        className={this.props.classes.input}
       />
     ) : (
       <TextField
@@ -76,6 +81,7 @@ class SessionForm extends React.Component {
         value={this.state.email}
         onChange={this.handleInput('email')}
         margin="normal"
+        className={this.props.classes.input}
       />
     );
 
@@ -86,6 +92,7 @@ class SessionForm extends React.Component {
         type="password"
         onChange={this.handleInput('password')}
         margin="normal"
+        className={this.props.classes.input}
       />
     ) : (
       <TextField
@@ -94,6 +101,7 @@ class SessionForm extends React.Component {
         type="password"
         onChange={this.handleInput('password')}
         margin="normal"
+        className={this.props.classes.input}
       />
     );
 
@@ -101,18 +109,24 @@ class SessionForm extends React.Component {
       <Button
         variant="outlined"
         type="submit"
-        onClick={this.handleSubmit}>
+        onClick={this.handleSubmit}
+        className={this.props.classes.button}
+        >
         {formType}
       </Button>
     );
 
     return (
-      <div>
-        <form>
-          {fname}
-          {email}
-          {password}
-          {password2}
+      <div className="session-form-container">
+        <form className="session-form">
+          <div>
+            {fname}
+            {email}
+          </div>
+          <div>
+            {password}
+            {password2}
+          </div>
           {button}
         </form>
         {navLink}
@@ -121,4 +135,13 @@ class SessionForm extends React.Component {
   }
 }
 
-export default SessionForm;
+const styles = {
+  input: {
+    "margin": "20px 10px"
+  },
+  button: {
+    "margin": "20px"
+  }
+}
+
+export default withStyles(styles)(SessionForm);
