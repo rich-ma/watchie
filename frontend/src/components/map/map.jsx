@@ -15,20 +15,15 @@ class Map extends React.Component {
     }
 
     render() {
-        return (
-            <div className="map">
-                <h1>This is the map</h1>
-                <br />
-                <div className="map-item">
-                    <Link className="Link" to="/location">
-                        <Button variant="outlined" color="secondary" >
-                            MAP
-                        </Button>
-                    </Link>
-                </div>
-                <MapItemContainer />
-            </div>
-        );
+      return (
+        <div className="map">
+          <h1>This is the map</h1>
+          <br />
+          <div className="map-item">
+            <MapItemContainer />
+          </div>
+        </div>
+      );
     }
 }
 
