@@ -24,7 +24,8 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(e) {
-    this.props.processForm(this.state, this.props.history);
+    e.preventDefault();
+    this.props.processForm(this.state);
   }
 
   render() {
@@ -117,7 +118,7 @@ class SessionForm extends React.Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           {fname}
           {lname}
           {email}

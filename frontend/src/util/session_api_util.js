@@ -33,7 +33,6 @@ export const registerUser = (userData, history) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .then(() => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -58,7 +57,6 @@ export const loginUser = (userData, history) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .then(() => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
