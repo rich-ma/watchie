@@ -19,8 +19,8 @@ export const setAuthToken = token => {
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-  axios
-    .post('/api/users/register', userData)
+  return axios
+    .post('/api/users', userData)
     .then(res => {
       // Save to localStorage
       const { token } = res.data;
@@ -33,6 +33,7 @@ export const registerUser = (userData, history) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
+    .then(() => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -42,9 +43,9 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login - Get User Token
-export const loginUser = userData => dispatch => {
-  axios
-    .post('/api/users/login', userData)
+export const loginUser = (userData, history) => dispatch => {
+  return axios
+    .post('/api/session', userData)
     .then(res => {
       // Save to localStorage
       const { token } = res.data;
@@ -57,6 +58,7 @@ export const loginUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
+    .then(() => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
