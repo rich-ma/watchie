@@ -39,7 +39,7 @@ export class MapItemContainer extends React.Component {
 
   render() {
     return (
-      <Map google={this.props.google} zoom={14}>
+      <Map google={this.props.google} zoom={14} className='actual-map'>
 
         {/* <Marker onClick={this.onMarkerClick}
           name={'Current location'} /> */}

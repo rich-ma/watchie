@@ -13,7 +13,6 @@ const UserSchema = new Schema({
   },
   lname: {
     type: String,
-    required: true,
   },
   passwordDigest: {
     type: String,
