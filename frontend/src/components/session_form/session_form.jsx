@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -23,7 +25,8 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(e) {
-    this.props.processForm(this.state);
+    this.props.processForm(this.state)
+      .then(() => this.props.history.push('/dashboard'));
   }
 
   render() {
