@@ -28,6 +28,8 @@ class Navbar extends React.Component {
   }
 
   render() {
+    if (!this.props.loggedIn) return null;
+    
     const sideList = (
       <div>
         <h1>fname</h1>
