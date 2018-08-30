@@ -1,7 +1,7 @@
 import {
     GET_ERRORS,
     RECEIVE_CURRENT_USER
-} from '../util/session_api_util';
+} from '../../util/session_api_util';
 
 export default (state = [], action) => {
     Object.freeze(state);
