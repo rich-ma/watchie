@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import {
   List,
@@ -11,9 +11,18 @@ import {
 import DashboardIcon from '@material-ui/icons/DashboardRounded';
 import MapIcon from '@material-ui/icons/Map';
 import HistoryIcon from '@material-ui/icons/History';
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
 
 class SideMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout() {
+    this.props.logout();
+    this.props.history.push('/');
+  }
 
   render() {
     return (
@@ -48,7 +57,9 @@ class SideMenu extends React.Component {
           </Link>
         </List>
         <Divider />
-        <List component="nav">
+        <List
+          component="nav"
+          onClick={this.handleLogout}>
           <ListItem button>
             <ListItemText primary="Logout" />
           </ListItem>
@@ -64,4 +75,4 @@ const styles = {
   }
 };
 
-export default withStyles(styles)(SideMenu);
+export default withStyles(styles)(withRouter(SideMenu));

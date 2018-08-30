@@ -31,7 +31,7 @@ class Navbar extends React.Component {
     const sideList = (
       <div>
         <h1>fname</h1>
-        <List><SideMenu /></List>
+        <List><SideMenu logout={this.props.logout}/></List>
       </div>
     );
 
