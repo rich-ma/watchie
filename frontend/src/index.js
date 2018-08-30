@@ -10,9 +10,12 @@ import configureStore from './store/store';
 import Root from "./components/root";
 import registerServiceWorker from './registerServiceWorker';
 
+import { fetchLocations } from './actions/location_actions';
+
 document.addEventListener('DOMContentLoaded', () => {
   let store = configureStore();
   // Check for token
+  
   if (localStorage.jwtToken) {
     // Set auth token header auth
     APIUtil.setAuthToken(localStorage.jwtToken);

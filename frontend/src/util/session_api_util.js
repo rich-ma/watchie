@@ -2,8 +2,8 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { setCurrentUser } from '../actions/session_actions.js';
 
-export const GET_ERRORS = 'GET_ERRORS';
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const GET_SESSION_ERRORS = 'GET_SESSION_ERRORS';
+export const CLEAR_SESSION_ERRORS = 'CLEAR_SESSION_ERRORS';
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 
 // We can use axios to set a default header
@@ -35,7 +35,7 @@ export const registerUser = (userData, history) => dispatch => {
     })
     .catch(err =>
       dispatch({
-        type: GET_ERRORS,
+        type: GET_SESSION_ERRORS,
         payload: err.response.data
       })
     );
@@ -59,7 +59,7 @@ export const loginUser = (userData, history) => dispatch => {
     })
     .catch(err =>
       dispatch({
-        type: GET_ERRORS,
+        type: GET_SESSION_ERRORS,
         payload: err.response.data
       })
     );
