@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
+import { ProtectedRoute, AuthRoute } from '../util/route_util';
+
 import Splash from './splash/splash';
 import Navbar from './navbar/navbar';
 import DashboardContainer from './dashboard/dashboard_container';
@@ -12,12 +14,12 @@ import SignupFormContainer from './session_form/signup_form_container';
 const App = () => (
   <div>
     <Route path="/" component={Navbar} />
-    <Route path="/login" component={LoginFormContainer} />
-    <Route path="/signup" component={SignupFormContainer} />
 
     <Switch>
       {/* <MuiThemeProvider theme={theme}> */}
       <Route exact path="/" component={Splash} />
+      <AuthRoute exact path="/login" component={LoginFormContainer} />
+      <AuthRoute exact path="/signup" component={SignupFormContainer} />
       <Route exact path="/dashboard" component={DashboardContainer} />
       <Route exact path="/map" component={MapContainer} />
       <Route exact path="/history" component={HistoryContainer} />
