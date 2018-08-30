@@ -23,7 +23,6 @@ router.post('/', (req, res) => {
       } else {
         const newUser = new User({
           fname: req.body.fname,
-          lname: req.body.lname,
           email: req.body.email,
           passwordDigest: req.body.password
         });
@@ -58,7 +57,6 @@ router.patch('/:id', (req, res) => {
         return res.status(404).json({email: 'This user does not exist' });
       } else {
         user.fname = req.body.fname;
-        user.lname = req.body.lname;
         user.save();
       }
     });
