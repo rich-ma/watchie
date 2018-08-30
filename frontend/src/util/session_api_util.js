@@ -23,7 +23,6 @@ export const registerUser = (userData, history) => dispatch => {
     .post('/api/users', userData)
     .then(res => {
       // Save to localStorage
-      debugger
       const { token } = res.data;
       // Set token to ls
       localStorage.setItem('jwtToken', token);
@@ -34,6 +33,7 @@ export const registerUser = (userData, history) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
+    .then(() => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -43,7 +43,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login - Get User Token
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
   return axios
     .post('/api/session', userData)
     .then(res => {
@@ -58,6 +58,7 @@ export const loginUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
+    .then(() => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

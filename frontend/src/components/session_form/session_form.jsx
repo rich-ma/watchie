@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -25,8 +24,7 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(e) {
-    this.props.processForm(this.state)
-      .then(() => this.props.history.push('/dashboard'));
+    this.props.processForm(this.state, this.props.history);
   }
 
   render() {
@@ -37,6 +35,7 @@ class SessionForm extends React.Component {
     if (formType === 'signup') {
       fname = (
         <TextField
+          required
           label="First Name"
           value={this.state.fname}
           onChange={this.handleInput('fname')}
@@ -45,14 +44,24 @@ class SessionForm extends React.Component {
       );
       lname = (
         <TextField
+          required
           label="Last Name"
           value={this.state.lname}
           onChange={this.handleInput('lname')}
           margin="normal"
         />
       );
-      password2 = (
+      password2 = errors.join("").includes("Confirm Password") ? (
         <TextField
+          error
+          label="Confirm Password"
+          type="password"
+          onChange={this.handleInput('password2')}
+          margin="normal"
+        />
+      ) : (
+        <TextField
+          required
           label="Confirm Password"
           type="password"
           onChange={this.handleInput('password2')}
@@ -61,17 +70,35 @@ class SessionForm extends React.Component {
       );
     }
 
-    const email = (
+    const email = errors.join("").includes("Email") ? (
       <TextField
-          label="Email"
-          value={this.state.email}
-          onChange={this.handleInput('email')}
-          margin="normal"
-        />
+        error
+        label="Email"
+        value={this.state.email}
+        onChange={this.handleInput('email')}
+        margin="normal"
+      />
+    ) : (
+      <TextField
+        required
+        label="Email"
+        value={this.state.email}
+        onChange={this.handleInput('email')}
+        margin="normal"
+      />
     );
 
-    const password = (
+    const password = errors.join("").includes("Password") ? (
       <TextField
+        error
+        label="Password"
+        type="password"
+        onChange={this.handleInput('password')}
+        margin="normal"
+      />
+    ) : (
+      <TextField
+        required
         label="Password"
         type="password"
         onChange={this.handleInput('password')}
@@ -82,6 +109,7 @@ class SessionForm extends React.Component {
     const button = (
       <Button
         variant="outlined"
+        type="submit"
         onClick={this.handleSubmit}>
         {formType}
       </Button>

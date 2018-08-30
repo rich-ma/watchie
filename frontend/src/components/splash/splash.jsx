@@ -9,11 +9,13 @@ const splash = () => {
             <img className="logo-img" src={'./images/clockpng.png'} />
             <h1>Watchie</h1>
             <br />
-            <Button variant="outlined" color="secondary" >
-                Sign Up
-            </Button>
+            <Link className="Link" to="/signup">
+              <Button variant="outlined" color="secondary" >
+                  Sign Up
+              </Button>
+            </Link>
             <br />
-            <Link className="Link" to="/dashboard">
+            <Link className="Link" to="/login">
                 <Button variant="outlined" color="secondary" >
                     Log In
                 </Button>
