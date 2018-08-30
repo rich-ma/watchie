@@ -6,10 +6,14 @@ import DashboardContainer from './dashboard/dashboard_container';
 import MapContainer from './map/map_container.js';
 import HistoryContainer from './history/history_container.js';
 import LocationContainer from './location/location_container.js';
+import LoginFormContainer from './session_form/login_form_container';
+import SignupFormContainer from './session_form/signup_form_container';
 
 const App = () => (
   <div>
     <Route path="/" component={Navbar} />
+    <Route path="/login" component={LoginFormContainer} />
+    <Route path="/signup" component={SignupFormContainer} />
 
     <Switch>
       {/* <MuiThemeProvider theme={theme}> */}

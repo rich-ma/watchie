@@ -10,9 +10,7 @@ import {
     Object.freeze(state);
     switch(action.type) {
       case RECEIVE_CURRENT_USER:
-        return { id: action.payload.id,
-                handle: action.payload.handle,
-                email: action.payload.email };
+        return { id: action.payload.id };
       default:
         return state;
     }
