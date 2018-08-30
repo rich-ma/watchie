@@ -20,10 +20,10 @@ const App = () => (
       <Route exact path="/" component={Splash} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
-      <Route exact path="/dashboard" component={DashboardContainer} />
-      <Route exact path="/map" component={MapContainer} />
-      <Route exact path="/history" component={HistoryContainer} />
-      <Route exact path="/location" component={LocationContainer} />
+      <ProtectedRoute exact path="/dashboard" component={DashboardContainer} />
+      <ProtectedRoute exact path="/map" component={MapContainer} />
+      <ProtectedRoute exact path="/history" component={HistoryContainer} />
+      <ProtectedRoute exact path="/location" component={LocationContainer} />
       {/* </MuiThemeProvider> */}
     </Switch>
   </div>
