@@ -51,15 +51,22 @@ class Navbar extends React.Component {
 
     const navMenu = (
       <ul className={this.props.classes.menu}>
-        <Link to="/dashboard" className={this.props.classes.link}>
-          <Button className={this.props.classes.button}>Dashboard</Button>
-        </Link>
-        <Link to="/map" className={this.props.classes.link}>
-          <Button className={this.props.classes.button}>Map</Button>
-        </Link>
-        <Link to="/history" className={this.props.classes.link}>
-          <Button className={this.props.classes.button}>History</Button>
-        </Link>
+        <div>
+          <Link to="/dashboard" className={this.props.classes.link}>
+            <Button className={this.props.classes.button}>Dashboard</Button>
+          </Link>
+          <Link to="/map" className={this.props.classes.link}>
+            <Button className={this.props.classes.button}>Map</Button>
+          </Link>
+          <Link to="/history" className={this.props.classes.link}>
+            <Button className={this.props.classes.button}>History</Button>
+          </Link>
+        </div>
+        <Button
+          className={this.props.classes.button}
+          onClick={this.props.logout}>
+          Logout
+        </Button>
       </ul>
     );
     return (
@@ -113,7 +120,9 @@ const styles = theme => ({
     "list-style": "none",
     "display": "none",
     [theme.breakpoints.up('sm')]: {
-      "display": "flex"
+      "display": "flex",
+      "justify-content": "space-between",
+      "width": "100%"
     }
   },
   link: {
