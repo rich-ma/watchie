@@ -18,10 +18,10 @@ router.post('/', (req, res) => {
           name: req.body.name,
           latitude: req.body.latitude,
           longitude: req.body.longitude,
-          street: req.body.street,
-          streetNumber: req.body.streetNumber,
-          city: req.body.city,
-          zipCode: req.body.zipCode
+          // street: req.body.street,
+          // streetNumber: req.body.streetNumber,
+          // city: req.body.city,
+          // zipCode: req.body.zipCode
         })
 
         newLocation.save()

@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
-const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const key = require('../../config/keys').secretOrKey;
 const validateRegisterInput = require('../../validation/register');
 
 //register new user
@@ -32,7 +33,16 @@ router.post('/', (req, res) => {
             // if (err) throw err;
             newUser.passwordDigest = hash;
             newUser.save()
-              .then(user => res.json(user))
+              .then(user => {
+                const payload = { id: user.id, name: user.name };
+
+                jwt.sign(payload, key, { expiresIn: 3600 }, (err, token) => {
+                  res.json({
+                    success: true,
+                    token: "Bearer " + token
+                  });
+                });
+              })
               .catch(err => console.log(err));
           });
         });
@@ -63,7 +73,7 @@ router.get('/:id', (req, res) => {
           email: 'This user does not exist'
         });
       } else {
-        res.json(user); //???
+        res.json(user);
       }
     })
 });
