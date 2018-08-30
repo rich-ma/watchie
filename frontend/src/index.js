@@ -34,9 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  window.fetchLocations = fetchLocations;
-  window.dispatch = store.dispatch;
-
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
   registerServiceWorker();
