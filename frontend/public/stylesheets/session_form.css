@@ -9,7 +9,14 @@
   max-width: 166px;
   margin: 0 auto;
 }
-
+.navlink *{
+  text-decoration: none;
+  color: black;
+  font-size: 9pt;
+}
+.session-button {
+  width: 166px;
+}
 @media only screen and (min-width: 600px) {
   .session-form > div {
     display: block;

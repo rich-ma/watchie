@@ -119,7 +119,7 @@ class SessionForm extends React.Component {
         variant="outlined"
         type="submit"
         onClick={this.handleSubmit}
-        className={this.props.classes.button}
+        className={`session-button ${this.props.classes.button}`}
       >
         {formType}
       </Button>
@@ -140,7 +140,11 @@ class SessionForm extends React.Component {
           </div>
           {button}
         </form>
+        <div className="navlink">
+        <Button className="session-button">
         {navLink}
+        </Button>
+        </div>
       </div>
     );
   }
