@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
             newUser.passwordDigest = hash;
             newUser.save()
               .then(user => {
-                const payload = { id: user.id, name: user.name };
+                const payload = { id: user.id, fname: user.fname };
 
                 jwt.sign(payload, key, { expiresIn: 3600 }, (err, token) => {
                   res.json({

@@ -32,7 +32,7 @@ class Navbar extends React.Component {
     
     const sideList = (
       <div>
-        <h1>fname</h1>
+        <h2 className="side-menu-name">{this.props.currentUser.fname}</h2>
         <List><SideMenu logout={this.props.logout}/></List>
       </div>
     );
