@@ -28,8 +28,7 @@ class Navbar extends React.Component {
     });
   }
 
-  handleLogout(e) {
-    e.preventDefault();
+  handleLogout() {
     this.props.logout();
     this.props.unregister();
 
