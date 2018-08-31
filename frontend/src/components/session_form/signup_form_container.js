@@ -3,6 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../../util/session_api_util';
 import SessionForm from './session_form';
+import {
+  fetchLocations
+} from '../../actions/location_actions';
 
 const mapStateToProps = ({ errors }) => {
   return {
@@ -15,6 +18,8 @@ const mapStateToProps = ({ errors }) => {
 const mapDispatchToProps = dispatch => {
   return {
     processForm: (user) => dispatch(registerUser(user)),
+    fetchLocations: () => dispatch(fetchLocations()),
+
   };
 };
 
