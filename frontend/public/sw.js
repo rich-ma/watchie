@@ -16,3 +16,8 @@ self.addEventListener('notificationclose', e => {
 self.addEventListener('notificationclick', e => {
   console.log("notificationclick fired");
 });
+
+self.addEventListener('pushsubscriptionchange', e => {
+  //update subscription on server, but not sure how to get current user id
+  debugger
+});

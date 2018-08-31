@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import registerServiceWorker from '../../registerServiceWorker';
 import Button from '@material-ui/core/Button';
 
 class Dashboard extends React.Component {
@@ -10,7 +11,7 @@ class Dashboard extends React.Component {
     componentWillReceiveProps(nextProps) { }
 
     componentDidMount() {
-        
+      registerServiceWorker();
     }
 
     render() {

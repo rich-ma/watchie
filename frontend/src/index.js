@@ -8,7 +8,7 @@ import { setCurrentUser, logoutUser } from './actions/session_actions';
 import configureStore from './store/store';
 // import App from './components/App';
 import Root from "./components/root";
-import registerServiceWorker from './registerServiceWorker';
+import { registerServiceWorker } from './registerServiceWorker';
 
 import { fetchLocations } from './actions/location_actions';
 
@@ -36,5 +36,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
-  registerServiceWorker();
+  // registerServiceWorker();
 });

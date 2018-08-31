@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Navbar from './navbar';
 import { logoutUser } from '../../actions/session_actions';
+import { unregister } from '../../registerServiceWorker';
 
 const mapStateToProps = state => ({
   loggedIn: Boolean(state.session.id),
@@ -8,7 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logoutUser())
+  logout: () => dispatch(logoutUser()),
+  unregister
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
