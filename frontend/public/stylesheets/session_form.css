@@ -1,0 +1,19 @@
+.session-form-container {
+  text-align: center;
+  padding-top: 15vh;
+}
+
+.session-form > div {
+  display: flex;
+  flex-direction: column;
+  max-width: 166px;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 600px) {
+  .session-form > div {
+    display: block;
+    max-width: none;
+    margin: auto;
+  }
+}
