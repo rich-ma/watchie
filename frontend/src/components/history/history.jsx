@@ -5,18 +5,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-
-import Button from '@material-ui/core/Button';
 
 class History extends React.Component {
     constructor(props) {
@@ -26,10 +14,16 @@ class History extends React.Component {
     componentWillReceiveProps(nextProps) { }
 
     componentDidMount() {
+        this.props.fetchLocations();
+    }
 
+    historyList () {
+       let history = this.props.locations.map()
     }
 
     render() {
+        if (this.props.locations.length === 0) return null;
+        // debugger
         return (
             <div className="history">
                 <h1>This is the history page</h1>
