@@ -46,4 +46,31 @@ webpush.setVapidDetails('mailto:stevielum1@gmail.com', publicVapidKey, privateVa
 
 const port = process.env.PORT || 8001;
 
+const User = require('./models/User');
+
+setInterval(() => {
+  const date = new Date();
+  if (date.getHours() <= 20 && date.getHours() >= 8) {
+    User.find()
+      .then(users => {
+        users.forEach(user => {
+          if (user.subscription) {
+            const subscription = JSON.parse(user.subscription);
+            
+            const payload = JSON.stringify({
+              title: "Watchie",
+              fname: user.fname
+            });
+          
+            webpush.sendNotification(subscription, payload)
+              .catch(err => {
+                // console.log(err);
+              });
+          }
+        });
+      });
+      console.log("Sent notifications on", date.toString());
+  }
+}, 60000);
+
 app.listen(port, () => console.log(`Server is running on port ${port}`));

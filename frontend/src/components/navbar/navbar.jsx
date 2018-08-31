@@ -19,6 +19,7 @@ class Navbar extends React.Component {
       right: false
     };
     this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   toggleDrawer(side, open) {
@@ -27,13 +28,29 @@ class Navbar extends React.Component {
     });
   }
 
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.logout();
+    this.props.unregister();
+
+    fetch(`${window.location.origin}/api/push/unsubscribe`, {
+      method: 'POST',
+      body: JSON.stringify({
+        user: this.props.currentUser
+      }),
+      headers: {
+        "content-type": "application/json"
+      }
+    });
+  }
+
   render() {
     if (!this.props.loggedIn) return null;
     
     const sideList = (
       <div>
-        <h1>fname</h1>
-        <List><SideMenu logout={this.props.logout}/></List>
+        <h2 className="side-menu-name">{this.props.currentUser.fname}</h2>
+        <List><SideMenu logout={this.handleLogout}/></List>
       </div>
     );
 
@@ -64,7 +81,7 @@ class Navbar extends React.Component {
         </div>
         <Button
           className={this.props.classes.button}
-          onClick={this.props.logout}>
+          onClick={this.handleLogout}>
           Logout
         </Button>
       </ul>
