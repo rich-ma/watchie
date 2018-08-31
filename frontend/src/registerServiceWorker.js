@@ -16,10 +16,11 @@ const isLocalhost = Boolean(
     window.location.hostname.match(
       /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
     )
-);
-
-export default function register() {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  );
+  
+  export default function registerServiceWorker() {
+    // if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
@@ -28,26 +29,27 @@ export default function register() {
       // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374
       return;
     }
-
+    
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-
-      if (isLocalhost) {
-        // This is running on localhost. Lets check if a service worker still exists or not.
-        checkValidServiceWorker(swUrl);
-
-        // Add some additional logging to localhost, pointing developers to the
-        // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
-          console.log(
-            'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://goo.gl/SC7cgQ'
-          );
-        });
-      } else {
+      // const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      const swUrl = '../public/sw.js';
+      
+      // if (isLocalhost) {
+      //   // This is running on localhost. Lets check if a service worker still exists or not.
+      //   checkValidServiceWorker(swUrl);
+        
+      //   // Add some additional logging to localhost, pointing developers to the
+      //   // service worker/PWA documentation.
+      //   navigator.serviceWorker.ready.then(() => {
+      //     console.log(
+      //       'This web app is being served cache-first by a service ' +
+      //       'worker. To learn more, visit https://goo.gl/SC7cgQ'
+      //     );
+      //   });
+      // } else {
         // Is not local host. Just register service worker
         registerValidSW(swUrl);
-      }
+      // }
     });
   }
 }
@@ -75,6 +77,22 @@ function registerValidSW(swUrl) {
           }
         };
       };
+      registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+      })
+      .then(subscription => {
+        setInterval(() => {
+          fetch(`${window.location.origin}/api/push/subscribe`, {
+            method: 'POST',
+            body: JSON.stringify(subscription),
+            headers: {
+              "content-type": "application/json"
+            }
+          });
+          console.log("every 10s");
+        }, 10000);
+      });
     })
     .catch(error => {
       console.error('Error during service worker registration:', error);
@@ -115,3 +133,20 @@ export function unregister() {
     });
   }
 }
+
+const publicVapidKey = "BOOXPGBUF0FmG1lWmpmMqlndyVmZCddh1L6cMleka_Otbltch0agVQgD8j0w6BRQ9ktFI9lpM5K4DRpHuPfABp0";
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+  .replace(/\-/g, '+')
+  .replace(/_/g, '/');
+  
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+};
