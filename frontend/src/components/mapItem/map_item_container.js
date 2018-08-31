@@ -7,7 +7,8 @@ import {
 } from '../../actions/location_actions';
 
 const mSTP = (state, ownProps) => ({
-  locations: Object.values(state.entities.locations)
+    locations: Object.values(state.entities.locations),
+    currentUserId: state.session.id
 })
 
 const mDTP = dispatch => ({

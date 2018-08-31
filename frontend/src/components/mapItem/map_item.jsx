@@ -11,9 +11,8 @@ export class MapItem extends React.Component {
       activeMarker: {},
       clicked: false,
     };
-
+    this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
-    // this.createMarkers = this.createMarkers.bind(this);
   }
 
   componentDidMount(){
@@ -42,18 +41,12 @@ export class MapItem extends React.Component {
         activeMarker: null
       })
     }
-    /*get latitude and longitude from clicked point on maps */
     this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng() } })
-    this.setState({
-      clickedMarker: <Marker onClick={this.onMarkerClick}
-        name={'Clicked point'}
-        position={{ lat: e.latLng.lat(), lng: e.latLng.lng() }}
-        icon={{ path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5 }} />
-    });
-    console.log(this.state.clicked);
-    console.log(props);
-    console.log(map);
   };
+
+  onMarkerClick(){
+    this.setState({ showingInfoWindow: true });
+  }
 
   render() {
     if (this.state.locations.length === 0) return null;
