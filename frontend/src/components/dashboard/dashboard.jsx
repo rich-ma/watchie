@@ -24,9 +24,13 @@ class Dashboard extends React.Component {
         });
     }
 
+    data() {
+        return [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
+        { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
+    }
     render() {
-        const data = [{ name: 'Group A', value: 400 }, { name: 'Group B', value: 300 },
-        { name: 'Group C', value: 300 }, { name: 'Group D', value: 200 }];
+        // const data = [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
+        // { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
 
         const renderActiveShape = (props) => {
             const RADIAN = Math.PI / 180;
@@ -44,11 +48,11 @@ class Dashboard extends React.Component {
 
             return (
                 <g>
-                    <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>{payload.name}</text>
+                    {/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>Optional Text</text> */}
                     <Sector
                         cx={cx}
                         cy={cy}
-                        // innerRadius={innerRadius}
+                        innerRadius={innerRadius}
                         outerRadius={outerRadius}
                         startAngle={startAngle}
                         endAngle={endAngle}
@@ -102,12 +106,13 @@ class Dashboard extends React.Component {
                         Year
                     </Button>
                 </div>
-                <img src="https://images-cdn.9gag.com/photo/1122177_700b.jpg" alt="" />
+                <div className="dashboard-chart">
+                {/* <img src="https://images-cdn.9gag.com/photo/1122177_700b.jpg" alt="" /> */}
                 <PieChart width={800} height={400}>
                     <Pie
                         activeIndex={this.state.activeIndex}
                         activeShape={renderActiveShape}
-                        data={data}
+                        data={this.data()}
                         cx={300}
                         cy={200}
                         // innerRadius={60}
@@ -116,6 +121,7 @@ class Dashboard extends React.Component {
                         onMouseEnter={this.onPieEnter}
                     />
                 </PieChart>
+                </div>
             </div>
         );
     }
