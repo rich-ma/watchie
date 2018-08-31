@@ -44,15 +44,15 @@ class SessionForm extends React.Component {
           className={this.props.classes.input}
         />
       ) : (
-        <TextField
-          required
-          label="First Name"
-          value={this.state.fname}
-          onChange={this.handleInput('fname')}
-          margin="normal"
-          className={this.props.classes.input}
-        />
-      );
+          <TextField
+            required
+            label="First Name"
+            value={this.state.fname}
+            onChange={this.handleInput('fname')}
+            margin="normal"
+            className={this.props.classes.input}
+          />
+        );
       password2 = errors.join("").includes("Confirm Password") ? (
         <TextField
           error
@@ -63,15 +63,15 @@ class SessionForm extends React.Component {
           className={this.props.classes.input}
         />
       ) : (
-        <TextField
-          required
-          label="Confirm Password"
-          type="password"
-          onChange={this.handleInput('password2')}
-          margin="normal"
-          className={this.props.classes.input}
-        />
-      );
+          <TextField
+            required
+            label="Confirm Password"
+            type="password"
+            onChange={this.handleInput('password2')}
+            margin="normal"
+            className={this.props.classes.input}
+          />
+        );
     }
 
     const email = errors.join("").includes("Email") ? (
@@ -84,15 +84,15 @@ class SessionForm extends React.Component {
         className={this.props.classes.input}
       />
     ) : (
-      <TextField
-        required
-        label="Email"
-        value={this.state.email}
-        onChange={this.handleInput('email')}
-        margin="normal"
-        className={this.props.classes.input}
-      />
-    );
+        <TextField
+          required
+          label="Email"
+          value={this.state.email}
+          onChange={this.handleInput('email')}
+          margin="normal"
+          className={this.props.classes.input}
+        />
+      );
 
     const password = errors.join("").includes("Password") ? (
       <TextField
@@ -104,15 +104,15 @@ class SessionForm extends React.Component {
         className={this.props.classes.input}
       />
     ) : (
-      <TextField
-        required
-        label="Password"
-        type="password"
-        onChange={this.handleInput('password')}
-        margin="normal"
-        className={this.props.classes.input}
-      />
-    );
+        <TextField
+          required
+          label="Password"
+          type="password"
+          onChange={this.handleInput('password')}
+          margin="normal"
+          className={this.props.classes.input}
+        />
+      );
 
     const button = (
       <Button
@@ -120,13 +120,15 @@ class SessionForm extends React.Component {
         type="submit"
         onClick={this.handleSubmit}
         className={this.props.classes.button}
-        >
+      >
         {formType}
       </Button>
     );
 
     return (
       <div className="session-form-container">
+        <div className="splash-background">
+        </div>
         <form className="session-form">
           <div>
             {fname}

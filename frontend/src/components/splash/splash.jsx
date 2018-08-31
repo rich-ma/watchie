@@ -10,21 +10,22 @@ const splash = () => {
             {/* <img className="splash-background" src={'./images/personnature.jpg'} /> */}
             <br />
             <img className="logo-img" src={'./images/clockpng.png'} />
+            <br />
             <h1>Watchie</h1>
             <br />
             <Link className="Link" to="/signup">
-                <Button variant="outlined" color="secondary" >
+                <Button className="splash-button" variant="outlined"  >
                     Sign Up
               </Button>
             </Link>
             <br />
             <Link className="Link" to="/login">
-                <Button variant="outlined" color="secondary" >
+                <Button className="splash-button" variant="outlined"  >
                     Log In
                 </Button>
             </Link>
             <br />
-            <Button variant="outlined" color="secondary" >
+            <Button className="splash-button" variant="outlined" >
                 Demo User
             </Button>
         </div>

@@ -16,7 +16,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: white;
+    /* color: white; */
     /* background-image: url(../images/personnature.jpg);
     background-size: cover; */
     /* background-size: 100%; */
@@ -27,9 +27,11 @@
     position: absolute;
     z-index: -1;
     /* width: 200px; */
+    top: 0;
+    left: 0;
     height: 100vh;
     width: 100vw;
-    background-image: url(../images/naturewatch.jpg);
+    background-image: url(../images/field.jpg);
     background-size: cover;
     
     -webkit-filter: blur(5px);
@@ -40,4 +42,8 @@
 }
 .Link {
     text-decoration: none;
+}
+
+.splash-button {
+    width: 200px;
 }
