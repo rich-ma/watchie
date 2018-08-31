@@ -11,7 +11,7 @@ router.post('/subscribe', (req, res) => {
       if (!user) {
         res.status(404).json({msg: "User not found for /api/push/subscribe"});
       } else {
-        user.subscription = subscription;
+        user.subscription = JSON.stringify(subscription);
         user.save();
       }
     });

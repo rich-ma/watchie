@@ -19,6 +19,9 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-})
+  subscription: {
+    type: String
+  }
+});
 
 module.exports = User = mongoose.model('users', UserSchema);
