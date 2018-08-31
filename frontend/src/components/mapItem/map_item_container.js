@@ -6,9 +6,13 @@ import {
   fetchLocations
 } from '../../actions/location_actions';
 
-const mSTP = (state, ownProps) => ({
-  locations: Object.values(state.entities.locations)
-})
+const mSTP = (state, ownProps) => {
+  debugger
+  return({
+    locations: Object.values(state.entities.locations)
+  }
+  )
+}
 
 const mDTP = dispatch => ({
   fetchLocations: () => dispatch(fetchLocations()),
