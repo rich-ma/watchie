@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Map from "./map";
 
-const mapStateToProps = (state, ownprops) => {
+const mapStateToProps = (state, ownProps) => {
     return {
 
     };

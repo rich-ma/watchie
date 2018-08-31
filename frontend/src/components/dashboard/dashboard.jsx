@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
     componentWillReceiveProps(nextProps) { }
 
     componentDidMount() {
-
+        
     }
 
     onPieEnter(data, index) {
