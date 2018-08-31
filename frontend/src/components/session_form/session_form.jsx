@@ -34,7 +34,16 @@ class SessionForm extends React.Component {
     let fname, password2;
 
     if (formType === 'signup') {
-      fname = (
+      fname = errors.join("").includes("First name") ? (
+        <TextField
+          error
+          label="First Name"
+          value={this.state.fname}
+          onChange={this.handleInput('fname')}
+          margin="normal"
+          className={this.props.classes.input}
+        />
+      ) : (
         <TextField
           required
           label="First Name"
@@ -140,7 +149,7 @@ const styles = {
     "margin": "20px 10px"
   },
   button: {
-    "margin": "20px"
+    "margin": "20px 0 30px 0"
   }
 }
 
