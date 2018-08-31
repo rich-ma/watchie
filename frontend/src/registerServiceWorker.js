@@ -77,22 +77,36 @@ function registerValidSW(swUrl) {
           }
         };
       };
+      let subscription;
       registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
       })
-      .then(subscription => {
-        setInterval(() => {
-          fetch(`${window.location.origin}/api/push/subscribe`, {
-            method: 'POST',
-            body: JSON.stringify(subscription),
-            headers: {
-              "content-type": "application/json"
-            }
-          });
-          console.log("every 10s");
-        }, 10000);
-      });
+      .then(sub => {
+        subscription = sub;
+        fetch(`${window.location.origin}/api/session`, {
+          method: 'GET',
+          headers: {
+            "Authorization": window.localStorage['jwtToken']
+          }
+        })
+        .then(res => {
+          res.json()
+          .then(user => {
+            const body = JSON.stringify({
+              sub: subscription,
+              user: user
+            });
+            fetch(`${window.location.origin}/api/push/subscribe`, {
+              method: 'POST',
+              body,
+              headers: {
+                "content-type": "application/json"
+              }
+            });
+          }).catch(console.log);
+        }).catch(console.log);
+      }).catch(err => console.log("pushManager.subscribe failed", err));
     })
     .catch(error => {
       console.error('Error during service worker registration:', error);

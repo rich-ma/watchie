@@ -1,7 +1,11 @@
 self.addEventListener('push', e => {
   const data = e.data.json();
   self.registration.showNotification(data.title, {
-    body: "Hello watchie user!"
+    body: `Hey ${data.fname}!`,
+    actions: [
+      {action: 'addLocation', title: 'Add location'},
+      {action: 'close', title: 'Close'},
+    ]
   });
 });
 
