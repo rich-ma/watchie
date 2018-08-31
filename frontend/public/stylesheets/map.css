@@ -1,3 +1,10 @@
 .actual-map{
   height: calc(100vh - 56px) !important
 }
+
+.test-marker{
+  z-index: 100;
+  height: 10px;
+  widows: 10px;
+  background-color: red;
+}

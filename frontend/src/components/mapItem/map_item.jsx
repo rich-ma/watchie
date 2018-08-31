@@ -35,8 +35,6 @@ export class MapItem extends React.Component {
     };
   }
 
-
-
   onMapClicked = (props, map, e) => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -57,50 +55,20 @@ export class MapItem extends React.Component {
     console.log(map);
   };
 
-  // createMarkers(){
-  //   debugger
-  //   const google = this.props.google;
-  //   this.state.locations.forEach(location => {
-  //     const myLatLong = new this.props.google.maps.latLng(location.latitude, location.longitude);
-  //     const marker = new this.props.google.Marker({
-  //       position: myLatLong,
-  //       title: location.name,
-  //     })
-  //     marker.setMap();
-  //   })
-  // }
-
-
   render() {
     if (this.state.locations.length === 0) return null;
 
-    const map = (<Map google={this.props.google} zoom={14} className='actual-map' id='map'>
+    return <div>
+        <Map google={this.props.google} zoom={14} className="actual-map" id="map" onClick={this.onMapClicked}>
 
-      <Map onClick={this.onMapClicked} />
+          {this.state.locations.map(location => {
+            return <Marker name={location.name} position={{ lat: location.latitude, lng: location.longitude }} key={location._id} />;
+          })}
 
-      <InfoWindow onClose={this.onInfoWindowClose}>
-        <div>
-          <h1>{this.state.locations.name}</h1>
-        </div>
-      </InfoWindow>
-
-      {this.state.locations.map(location => {
-        return(
-          <Marker lat={location.latitude} long={location.longitude} key={location._id} className="test-marker"/>
-        )
-      })}
-    </Map>
-    )
-
-    return (
-      <div>
-        {map}
-      </div>
-    );
+        </Map>
+      </div>;
   }
 }
-
-
 
 export default GoogleApiWrapper({
   apiKey: keys.googleAPI
