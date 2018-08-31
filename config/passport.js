@@ -11,11 +11,11 @@ options.secretOrKey = keys.secretOrKey;
 module.exports = passport => {
   passport.use(new JwtStrategy(options, (payload, done) => {
     User.findById(payload.id)
-      .then(user => {
-        if (user) {
-          // return the user to the frontend
-          return done(null, user);
-        }
+    .then(user => {
+      if (user) {
+        // return the user to the frontend
+        return done(null, user);
+      }
         // return false since there is no user
         return done(null, false);
       })

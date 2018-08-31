@@ -17,7 +17,7 @@ class Test extends React.Component {
 
   registerServiceWorker() {
     if ('serviceWorker' in navigator) {
-      this.serviceWorker = navigator.serviceWorker.register('./sw.js');
+      this.serviceWorker = navigator.serviceWorker.register('../../public/sw.js');
     } else {
       console.log("Push notifications are not supported in this browser");
     }

@@ -12,9 +12,9 @@ router.get('/', passport.authenticate('jwt', {
   session: false
 }), (req, res) => {
   res.json({
-    id: req.user.id,
+    id: req.user._id,
     fname: req.user.fname,
-    email: req.user.email,
+    email: req.user.email
   });
 });
 
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
       bcrypt.compare(password, user.passwordDigest)
         .then(isMatch => {
           if (isMatch) {
-            const payload = { id: user.id };
+            const payload = { id: user.id, fname: user.fname };
 
             jsonwebtoken.sign(
               payload,

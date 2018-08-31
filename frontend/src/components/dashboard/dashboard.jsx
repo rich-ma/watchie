@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import registerServiceWorker from '../../registerServiceWorker';
 import Button from '@material-ui/core/Button';
 import { PieChart, Pie, Sector } from 'recharts';
 
@@ -15,7 +16,7 @@ class Dashboard extends React.Component {
     componentWillReceiveProps(nextProps) { }
 
     componentDidMount() {
-        
+      registerServiceWorker();
     }
 
     onPieEnter(data, index) {
