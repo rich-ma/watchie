@@ -44,6 +44,24 @@ router.get('/:id', (req, res) => {
     })
 })
 
+router.get('/', (req, res) => {
+  Location.find()
+    .then(payload => {
+      if (!payload) {
+        return res.status(404).json({
+          email: 'This location does not exist'
+        });
+      } else {
+        console.log(payload);
+        let locations = {};
+        payload.forEach(location => {
+          locations[location._id] = location;
+        });
+        res.json(locations); 
+      }
+    })
+})
+
 router.patch('/:id', (req, res) => {
   Location.findById(req.params.id)
     .then(location => {
