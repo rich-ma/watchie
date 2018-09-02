@@ -47,7 +47,7 @@ export default function registerServiceWorker() {
       // Is not local host. Just register service worker
       // }
     });
-    const swUrl = "../public/sw.js";
+    const swUrl = `${window.location.origin}/sw.js`;
     registerValidSW(swUrl);
   }
 }
@@ -86,50 +86,47 @@ function registerValidSW(swUrl) {
                   }
                 })
                   .then(res => {
-                    res
-                      .json()
-                      .then(data => {
-                        user = data;
-                      })
+                    res.json()
+                      .then(data => { user = data; })
                       .then(() => {
                         if (sub) {
-                          const body = JSON.stringify({
-                            sub,
-                            user
-                          });
+                          const body = JSON.stringify({ sub, user });
                           fetch(
                             `${window.location.origin}/api/push/subscribe`,
                             {
                               method: "POST",
                               body,
-                              headers: {
-                                "content-type": "application/json"
-                              }
+                              headers: { "content-type": "application/json" }
                             }
                           );
                         } else {
                           registration.pushManager
                             .subscribe({
                               userVisibleOnly: true,
-                              applicationServerKey: urlBase64ToUint8Array(
-                                publicVapidKey
-                              )
+                              applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
                             })
                             .then(sub => {
-                              const body = JSON.stringify({
-                                sub,
-                                user
-                              });
+                              const body = JSON.stringify({ sub, user });
                               fetch(
                                 `${window.location.origin}/api/push/subscribe`,
                                 {
                                   method: "POST",
                                   body,
-                                  headers: {
-                                    "content-type": "application/json"
-                                  }
+                                  headers: { "content-type": "application/json" }
                                 }
-                              );
+                              )
+                              .then(() => {
+                                const worker = new Worker(swUrl);
+                                setInterval(() => {
+                                  navigator.geolocation.getCurrentPosition(pos => {
+                                    worker.postMessage({
+                                      lat: pos.coords.latitude,
+                                      lng: pos.coords.longitude,
+                                      user
+                                    });
+                                  });
+                                }, 60000);
+                              });
                             })
                             .catch(console.log);
                         }
@@ -178,7 +175,7 @@ function checkValidServiceWorker(swUrl) {
 export function unregister() {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.ready.then(registration => {
-      registration.unregister();
+      registration.unregister().then(() => console.log("unregistered service worker"));
     });
   }
 }
