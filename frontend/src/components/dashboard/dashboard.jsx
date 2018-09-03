@@ -109,15 +109,15 @@ class Dashboard extends React.Component {
                 </div>
                 <div className="dashboard-chart">
                 {/* <img src="https://images-cdn.9gag.com/photo/1122177_700b.jpg" alt="" /> */}
-                <PieChart width={800} height={400}>
+                <PieChart width={800} height={600}>
                     <Pie
                         activeIndex={this.state.activeIndex}
                         activeShape={renderActiveShape}
                         data={this.data()}
-                        cx={300}
-                        cy={200}
+                        cx={400}
+                        cy={300}
                         // innerRadius={60}
-                        outerRadius={80}
+                        outerRadius={200}
                         fill="#8884d8"
                         onMouseEnter={this.onPieEnter}
                     />
