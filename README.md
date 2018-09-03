@@ -119,6 +119,7 @@ self.addEventListener('push', e => {
 ```
 
 The notification looks like this:
+
 ![push_notification](./docs/push_notification.png)
 
 ###  Future Plans
