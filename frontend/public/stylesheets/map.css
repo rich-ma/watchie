@@ -1,5 +1,6 @@
 .actual-map{
-  height: calc(100vh - 56px) !important
+  height: calc(100vh - 56px) !important;
+  top: 56px;
 }
 
 .test-marker{
@@ -7,4 +8,25 @@
   height: 10px;
   widows: 10px;
   background-color: red;
+}
+
+.fa-map-marker-alt {
+  color: rgb(255, 255, 255);
+  font-size: 26px;
+  z-index: 55;
+  margin-left: calc(100vw - 70px);
+  margin-top: 66px;
+  background-clip: padding-box;
+}
+
+.clicked {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+
+
+.map-item {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

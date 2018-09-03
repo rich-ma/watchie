@@ -4,27 +4,27 @@ import Button from '@material-ui/core/Button';
 import MapItemContainer from '../mapItem/map_item_container';
 
 class Map extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
 
-    componentWillReceiveProps(nextProps) { }
+  }
 
-    componentDidMount() {
+  componentWillReceiveProps(nextProps){
 
-    }
+   }
 
-    render() {
-      return (
-        <div className="map">
-          <h1>This is the map</h1>
-          <br />
-          <div className="map-item">
-            <MapItemContainer />
-          </div>
-        </div>
-      );
-    }
+  componentDidMount(){
+  }
+
+
+
+  render() {
+    return (
+    <div className="map">
+        <MapItemContainer />
+    </div>
+    )
+  }
 }
 
 export default withRouter(Map);
