@@ -1,6 +1,6 @@
 import React from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import keys from '../../config/keys';
+import keys from '../../config/keys.js';
 
 export class MapItem extends React.Component {
   constructor(props) {
