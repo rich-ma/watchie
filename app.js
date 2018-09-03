@@ -23,12 +23,6 @@ app.get("/", (request, res) => {
   res.sendFile(path.join(__dirname, "./frontend/index.html"));
 });
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('frontend/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -47,6 +41,12 @@ app.use("/api/categories", categories);
 app.use("/api/locations", locations);
 app.use("/api/times", times);
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
 const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
 webpush.setVapidDetails('mailto:stevielum1@gmail.com', publicVapidKey, privateVapidKey);
