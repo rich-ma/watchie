@@ -19,17 +19,17 @@ mongoose.connect(db, {useNewUrlParser: true})
 
 
 // app.get("/", (req, res) => res.send("Hello Nigel"));
-app.get("/", (request, res) => {
-  res.sendFile(path.join(__dirname, "./frontend/index.html"));
-});
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend'));
-  app.get('*', (req, res) => {
+  app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'frontend', 'public', 'index.html'));
   });
 } else {
   app.use(express.static('frontend'));
+  app.get("/", (request, res) => {
+    res.sendFile(path.join(__dirname, "./frontend/index.html"));
+  });
 }
 
 app.use(bodyParser.urlencoded({
