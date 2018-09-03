@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Watchie is always watching",
   "main": "app.js",
+  "engine": {
+    "node": "v8.9.0",
+    "npm": "5.5.1"
+  },
   "scripts": {
     "build": "webpack --mode=development --watch",
     "server": "nodemon app.js",
