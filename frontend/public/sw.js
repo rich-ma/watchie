@@ -30,20 +30,20 @@ self.addEventListener('notificationclick', e => {
 
 self.addEventListener('pushsubscriptionchange', e => {
   //update subscription on server, but not sure how to get current user id
-  debugger
+  // debugger
 });
 
 self.onabortpayment = e => {
-  debugger
+  // debugger
 };
 self.onactivate = e => {
   console.log("service worker onactivate fired");
 };
 self.oncanmakepayment = e => {
-  debugger
+  // debugger
 };
 self.onfetch = e => {
-  debugger
+  // debugger
 };
 self.oninstall = e => {
   console.log("service worker oninstall fired")
@@ -52,8 +52,8 @@ self.onmessage = e => {
   console.log("service worker onmessage fired", e.data);
 };
 self.onpaymentrequest = e => {
-  debugger
+  // debugger
 };
 self.onsync = e => {
-  debugger
+  // debugger
 };
