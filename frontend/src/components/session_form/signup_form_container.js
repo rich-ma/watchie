@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { registerUser } from '../../util/session_api_util';
+import { registerUser, CLEAR_SESSION_ERRORS } from '../../util/session_api_util';
 import SessionForm from './session_form';
 import {
   fetchLocations
@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => {
   return {
     processForm: (user) => dispatch(registerUser(user)),
     fetchLocations: () => dispatch(fetchLocations()),
-
+    clearSessionErrors: () => dispatch({ type: CLEAR_SESSION_ERRORS })
   };
 };
 
