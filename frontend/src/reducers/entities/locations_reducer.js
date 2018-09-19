@@ -9,7 +9,7 @@ const locationReducer = (state = {}, action) => {
     case RECEIVE_LOCATIONS:
       return action.payload.data;      
     case RECEIVE_LOCATION:
-      return merge(newState, { [action.location._id]: action.location })
+      return merge(newState, { [action.location.data._id]: action.location.data })
     default:
       return state;
   }

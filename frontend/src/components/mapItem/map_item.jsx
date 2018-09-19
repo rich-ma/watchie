@@ -11,10 +11,16 @@ export class MapItem extends React.Component {
       activeMarker: {},
       clicked: false,
       latLong: false,
+      showPopup: false,
+      locationName: "",
+      locationCategory: ""
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
     this.toggleClick = this.toggleClick.bind(this);
+    this.closeLocationPopup = this.closeLocationPopup.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount(){
@@ -26,7 +32,6 @@ export class MapItem extends React.Component {
 
   toggleClick() {
     this.setState({ clicked: this.state.clicked ? false : true });
-    console.log(this.state.clicked);
   }
 
 
@@ -47,8 +52,9 @@ export class MapItem extends React.Component {
     if (this.state.clicked) {
       this.setState({
         showingInfoWindow: false,
-        activeMarker: null
-      })
+        activeMarker: null,
+        showPopup: true,
+      });
     }
     this.setState({ latLong: { lat: e.latLng.lat(), lng: e.latLng.lng() } })
   };
@@ -57,10 +63,61 @@ export class MapItem extends React.Component {
     this.setState({ showingInfoWindow: true });
   }
 
+  closeLocationPopup(e) {
+    if (e.target.classList.contains("location-popup-background")) {
+      this.setState({ showPopup: false, clicked: !this.state.clicked });
+    }
+  }
+
+  handleInput(type) {
+    return e => {
+      this.setState({ [type]: e.currentTarget.value });
+    }
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.createLocation({
+      name: this.state.locationName,
+      latitude: this.state.latLong.lat,
+      longitude: this.state.latLong.lng
+    })
+      .then(payload => {
+        this.props.createCategory({
+          category: this.state.locationCategory,
+          userId: this.props.currentUserId,
+          locationId: payload.location.data._id
+        });
+        this.setState({ showPopup: false, clicked: !this.state.clicked });
+      });
+  }
+
   render() {
     if (this.state.locations.length === 0) return null;
 
+    const popup = this.state.showPopup ? (
+      <div className="location-popup-background"
+        onClick={this.closeLocationPopup}>
+        <form className="location-popup" onSubmit={this.handleSubmit}>
+          <label>Location Name:
+            <input
+              type="text"
+              value={this.state.locationName}
+              onChange={this.handleInput("locationName")} />
+          </label>
+          <label>Category:
+            <input
+              type="text"
+              value={this.state.locationCategory}
+              onChange={this.handleInput("locationCategory")} />
+          </label>
+          <button type="submit">Add Location</button>
+        </form>
+      </div>
+    ) : (null);
+
     return <div className="map-item">
+        {popup}
         <Map google={this.props.google} zoom={14} className="actual-map" id="map" onClick={this.onMapClicked}>
           {this.state.locations.map(location => {
             return <Marker name={location.name} position={{ lat: location.latitude, lng: location.longitude }} key={location._id} />;
