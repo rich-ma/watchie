@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Watchie is always watching",
   "main": "app.js",
+  "engines": {
+    "node": "v8.9.0",
+    "npm": "5.5.1"
+  },
   "scripts": {
     "build": "webpack --mode=development --watch",
     "server": "nodemon app.js",
@@ -10,7 +14,7 @@
     "frontend-install": "npm install --prefix frontend",
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "repository": {
     "type": "git",

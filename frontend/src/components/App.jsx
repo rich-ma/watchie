@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import { ProtectedRoute, AuthRoute } from '../util/route_util';
 
-import Splash from './splash/splash';
+import SplashContainer from './splash/splash_container';
 import NavbarContainer from './navbar/navbar_container';
 import DashboardContainer from './dashboard/dashboard_container';
 import MapContainer from './map/map_container.js';
@@ -17,7 +17,7 @@ const App = () => (
 
     <Switch>
       {/* <MuiThemeProvider theme={theme}> */}
-      <AuthRoute exact path="/" component={Splash} />
+      <AuthRoute exact path="/" component={SplashContainer} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
       <ProtectedRoute exact path="/dashboard" component={DashboardContainer} />

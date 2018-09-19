@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const app = express();
 const path = require("path");
-const db = require('./config/keys').mongoURI;
+const db = require('./config/keys.js').mongoURI;
 const users = require("./routes/api/users");
 const session = require("./routes/api/session");
 const push = require("./routes/api/push");
@@ -17,18 +17,7 @@ mongoose.connect(db, {useNewUrlParser: true})
 .then(() => console.log("Connected to MongoDB successfully"))
 .catch(err => console.log(err));
 
-
 // app.get("/", (req, res) => res.send("Hello Nigel"));
-app.get("/", (request, res) => {
-  res.sendFile(path.join(__dirname, "./frontend/index.html"));
-});
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('frontend/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -37,8 +26,6 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
-
-app.use(express.static('frontend'));
 
 app.use("/api/session", session);
 app.use("/api/users", users);
@@ -59,25 +46,37 @@ setInterval(() => {
   const date = new Date();
   if (date.getHours() <= 20 && date.getHours() >= 8) {
     User.find()
-      .then(users => {
-        users.forEach(user => {
-          if (user.subscription) {
-            const subscription = JSON.parse(user.subscription);
-            
-            const payload = JSON.stringify({
-              title: "Watchie",
-              fname: user.fname
-            });
+    .then(users => {
+      users.forEach(user => {
+        if (user.subscription) {
+          const subscription = JSON.parse(user.subscription);
           
-            webpush.sendNotification(subscription, payload)
-              .catch(err => {
-                // console.log(err);
-              });
-          }
-        });
+          const payload = JSON.stringify({
+            title: "Watchie",
+            fname: user.fname
+          });
+          
+          webpush.sendNotification(subscription, payload)
+          .catch(err => {
+            // console.log(err);
+          });
+        }
       });
-      console.log("Sent notifications on", date.toString());
+    });
+    console.log("Sent notifications on", date.toString());
   }
 }, 60000);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+} else {
+  app.use(express.static('frontend'));
+  app.get("/", (request, res) => {
+    res.sendFile(path.join(__dirname, "./frontend/index.html"));
+  });
+}
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));

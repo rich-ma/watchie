@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
-const key = require('../../config/keys').secretOrKey;
+const key = require('../../config/keys.js').secretOrKey;
 const validateRegisterInput = require('../../validation/register');
 
 //register new user

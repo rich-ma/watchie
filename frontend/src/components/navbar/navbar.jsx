@@ -30,6 +30,7 @@ class Navbar extends React.Component {
 
   handleLogout() {
     this.props.logout();
+    this.props.history.push("/");
     this.props.unregister();
 
     fetch(`${window.location.origin}/api/push/unsubscribe`, {
