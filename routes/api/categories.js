@@ -51,6 +51,21 @@ router.get('/:id', (req, res) => {
     })
 })
 
-
+router.get('/', (req, res) => {
+  Category.find()
+  .then(payload => {
+    if (!payload) {
+      return res.status(404).json({
+        email: 'This category does not exist'
+      });
+    } else {
+      let categories = {};
+      payload.forEach(category => {
+        categories[category._id] = category;
+      });
+      res.json(categories); 
+    }
+  });
+});
 
 module.exports = router;

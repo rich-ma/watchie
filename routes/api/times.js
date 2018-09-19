@@ -53,5 +53,22 @@ router.patch('/:id', (req, res) => {
     });
 })
 
+router.get('/', (req, res) => {
+  Time.find()
+  .then(payload => {
+    if (!payload) {
+      return res.status(404).json({
+        email: 'This time does not exist'
+      });
+    } else {
+      let times = {};
+      payload.forEach(time => {
+        times[time._id] = time;
+      });
+      res.json(times); 
+    }
+  });
+});
+
 
 module.exports = router;
