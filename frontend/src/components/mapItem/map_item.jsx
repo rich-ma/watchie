@@ -85,6 +85,7 @@ export class MapItem extends React.Component {
       .then(location => {
         //create category
       });
+    this.setState({ showPopup: false, clicked: !this.state.clicked });
   }
 
   render() {
