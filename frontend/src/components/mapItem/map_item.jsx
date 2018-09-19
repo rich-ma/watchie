@@ -83,7 +83,6 @@ export class MapItem extends React.Component {
       longitude: this.state.latLong.lng
     })
       .then(payload => {
-        debugger
         this.props.createCategory({
           category: this.state.locationCategory,
           userId: this.props.currentUserId,

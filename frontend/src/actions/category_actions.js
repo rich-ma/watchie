@@ -8,7 +8,6 @@ const receiveCategory = category => ({
 });
 
 export const createCategory = category => dispatch => {
-  debugger
   return CategoryAPIUtil.createCategory(category)
     .then(newCategory => dispatch(receiveCategory(newCategory)));
 };
