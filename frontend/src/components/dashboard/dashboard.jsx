@@ -26,9 +26,34 @@ class Dashboard extends React.Component {
     }
 
     data() {
-        return [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
-        { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
+      const data = {};
+      this.props.categories.forEach(category => {
+        if (data[category.category]) {
+          data[category.category].value += 1;
+        } else {
+          data[category.category] = {
+            name: category.category,
+            value: 1,
+            fill: this.randomColor()
+          };
+        }
+      });
+
+      return Object.values(data);
+
+        // return [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
+        // { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
     }
+
+    randomColor() {
+      const values = "0123456789ABCDEF";
+      let color = "";
+      for(let i = 0; i < 6; i++) {
+        color += values[Math.floor(Math.random() * values.length)];
+      }
+      return "#" + color;
+    }
+
     render() {
         // const data = [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
         // { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
