@@ -28,7 +28,7 @@ class History extends React.Component {
                     <List component="nav">
                         <Divider />
                         {this.props.locations.map(location => (
-                          <div>
+                          <div key={location._id}>
                             <ListItem button>
                                 <ListItemText primary={location.name} />
                             </ListItem>

@@ -151,6 +151,7 @@ class Dashboard extends React.Component {
                         outerRadius={200}
                         fill="#8884d8"
                         onMouseEnter={this.onPieEnter}
+                        dataKey="value"
                     />
                 </PieChart>
                 </div>
