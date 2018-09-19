@@ -81,14 +81,20 @@ export class MapItem extends React.Component {
       name: this.state.locationName,
       latitude: this.state.latLong.lat,
       longitude: this.state.latLong.lng
-    })
-      .then(payload => {
+    }).then(payload => {
         this.props.createCategory({
           category: this.state.locationCategory,
           userId: this.props.currentUserId,
           locationId: payload.location.data._id
         });
         this.setState({ showPopup: false, clicked: !this.state.clicked });
+        return payload;
+      }).then(payload => {
+        this.props.createTime({
+          duration: 0,
+          locationId: payload.location.data._id,
+          userId: this.props.currentUserId
+        });
       });
   }
 
