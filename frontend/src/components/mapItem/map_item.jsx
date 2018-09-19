@@ -82,10 +82,15 @@ export class MapItem extends React.Component {
       latitude: this.state.latLong.lat,
       longitude: this.state.latLong.lng
     })
-      .then(location => {
-        //create category
+      .then(payload => {
+        debugger
+        this.props.createCategory({
+          category: this.state.locationCategory,
+          userId: this.props.currentUserId,
+          locationId: payload.location.data._id
+        });
+        this.setState({ showPopup: false, clicked: !this.state.clicked });
       });
-    this.setState({ showPopup: false, clicked: !this.state.clicked });
   }
 
   render() {
