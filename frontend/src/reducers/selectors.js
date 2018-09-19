@@ -3,3 +3,12 @@ export const getCategories = (state, userId) => {
     return category.userId === userId;
   });
 };
+
+export const getLocations = (state, userId) => {
+  const locations = Object.values(state.entities.locations);
+  const times = Object.values(state.entities.times).filter(time => {
+    return time.userId === userId;
+  }).map(time => time.locationId);
+
+  return locations.filter(location => times.includes(location._id));
+};
