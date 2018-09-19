@@ -3,7 +3,8 @@ import {
 } from 'react-redux';
 import MapItem from './map_item';
 import {
-  fetchLocations
+  fetchLocations,
+  createLocation
 } from '../../actions/location_actions';
 
 const mSTP = (state, ownProps) => ({
@@ -13,6 +14,7 @@ const mSTP = (state, ownProps) => ({
 
 const mDTP = dispatch => ({
   fetchLocations: () => dispatch(fetchLocations()),
+  createLocation: location => dispatch(createLocation(location))
 })
 
 
