@@ -35,23 +35,7 @@ class History extends React.Component {
                             <Divider />
                           </div>
                         ))}
-                        <ListItem button>
-                            <ListItemText primary="History Item 1" />
-                        </ListItem>
-                        <Divider />
-                        <ListItem button divider>
-                            <ListItemText primary="History Item 2" />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemText primary="History Item 3" />
-                        </ListItem>
-                        <Divider />
-                        <ListItem button>
-                            <ListItemText primary="History Item 4" />
-                        </ListItem>
-                        <Divider />
                     </List>
-
                 </div>
             </div>
         );
