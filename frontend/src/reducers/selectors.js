@@ -10,5 +10,7 @@ export const getLocations = (state, userId) => {
     return time.userId === userId;
   }).map(time => time.locationId);
 
-  return locations.filter(location => times.includes(location._id));
+  return locations
+  .filter(location => times.includes(location._id))
+  .sort((loc1, loc2) => loc1.date < loc2.date);
 };
