@@ -27,6 +27,7 @@ class Dashboard extends React.Component {
 
     data() {
       const data = {};
+      let colorIdx = 0;
       this.props.categories.forEach(category => {
         if (data[category.category]) {
           data[category.category].value += 1;
@@ -34,8 +35,9 @@ class Dashboard extends React.Component {
           data[category.category] = {
             name: category.category,
             value: 1,
-            fill: this.randomColor()
+            fill: this.color(colorIdx)
           };
+          colorIdx++;
         }
       });
 
@@ -45,13 +47,17 @@ class Dashboard extends React.Component {
         // { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
     }
 
-    randomColor() {
-      const values = "0123456789ABCDEF";
-      let color = "";
-      for(let i = 0; i < 6; i++) {
-        color += values[Math.floor(Math.random() * values.length)];
-      }
-      return "#" + color;
+    color(idx) {
+      const colors = ["#0088FE", "#8884D8", "#00C49F", "#FFBB28"];
+      return colors[idx % colors.length];
+
+      // RANDOM COLOR
+      // const values = "0123456789ABCDEF";
+      // let color = "";
+      // for(let i = 0; i < 6; i++) {
+      //   color += values[Math.floor(Math.random() * values.length)];
+      // }
+      // return "#" + color;
     }
 
     render() {
