@@ -8,7 +8,10 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeIndex: 0
+            activeIndex: 0,
+            day: false,
+            month: false,
+            year: false
         }
         this.onPieEnter = this.onPieEnter.bind(this);
     }
@@ -28,7 +31,20 @@ class Dashboard extends React.Component {
     data() {
       const data = {};
       let colorIdx = 0;
+
+      const currentDate = new Date;
+
       this.props.categories.forEach(category => {
+        const categoryDate = new Date(category.date);
+
+        if (this.state.day) {
+          if (categoryDate.getDay() !== currentDate.getDay()) return;
+        } else if (this.state.month) {
+          if (categoryDate.getMonth() !== currentDate.getMonth()) return;
+        } else if (this.state.year) {
+          if (categoryDate.getFullYear() !== currentDate.getFullYear()) return;
+        }
+
         if (data[category.category]) {
           data[category.category].value += 1;
         } else {
@@ -128,13 +144,13 @@ class Dashboard extends React.Component {
                      </Button>
                 </div>
                 <div className="dashboard-date">
-                    <Button variant="outlined" color="primary" >
+                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: true, month: false, year: false })}>
                         Day
                     </Button>
-                    <Button variant="outlined" color="primary" >
+                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: false, month: true, year: false })} >
                         Month
                     </Button>
-                    <Button variant="outlined" color="primary" >
+                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: false, month: false, year: true })} >
                         Year
                     </Button>
                 </div>
