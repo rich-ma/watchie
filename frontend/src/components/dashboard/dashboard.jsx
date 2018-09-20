@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
     }
 
     color(idx) {
-      const colors = ["#0088FE", "#8884D8", "#00C49F", "#FFBB28"];
+      const colors = ["rgba(0,136,254,1)", "rgba(136,132,216,1)", "rgba(0,196,159,1)", "rgba(255,187,40,1)", "rgba(255,56,56,1)", "rgba(0,136,254,0.7)", "rgba(136,132,216,0.7)", "rgba(0,196,159,0.7)", "rgba(255,187,40,0.7)", "rgba(255,56,56,0.7)"];
       return colors[idx % colors.length];
 
       // RANDOM COLOR
