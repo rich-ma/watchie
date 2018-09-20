@@ -22,6 +22,12 @@ class Navbar extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
+  componentDidMount() {
+    this.props.fetchLocations();
+    this.props.fetchCategories();
+    this.props.fetchTimes();
+  }
+
   toggleDrawer(side, open) {
     this.setState({
       [side]: open,
@@ -46,7 +52,7 @@ class Navbar extends React.Component {
 
   render() {
     if (!this.props.loggedIn) return null;
-    
+
     const sideList = (
       <div>
         <h2 className="side-menu-name">{this.props.currentUser.fname}</h2>

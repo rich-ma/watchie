@@ -1,20 +1,20 @@
 import { connect } from "react-redux";
 import History from "./history";
-import { fetchLocations } from '../../actions/location_actions';
+import { getLocations } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownprops) => {
-    return {
-        locations: Object.values(state.entities.locations)
-    };
+  return {
+    locations: getLocations(state, state.session.id)
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        fetchLocations: () => dispatch(fetchLocations())
-    };
+  return {
+
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(History);

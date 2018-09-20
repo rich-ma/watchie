@@ -8,7 +8,10 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeIndex: 0
+            activeIndex: 0,
+            day: false,
+            month: false,
+            year: false
         }
         this.onPieEnter = this.onPieEnter.bind(this);
     }
@@ -26,9 +29,53 @@ class Dashboard extends React.Component {
     }
 
     data() {
-        return [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
-        { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
+      const data = {};
+      let colorIdx = 0;
+
+      const currentDate = new Date;
+
+      this.props.categories.forEach(category => {
+        const categoryDate = new Date(category.date);
+
+        if (this.state.day) {
+          if (categoryDate.getDay() !== currentDate.getDay()) return;
+        } else if (this.state.month) {
+          if (categoryDate.getMonth() !== currentDate.getMonth()) return;
+        } else if (this.state.year) {
+          if (categoryDate.getFullYear() !== currentDate.getFullYear()) return;
+        }
+
+        if (data[category.category]) {
+          data[category.category].value += 1;
+        } else {
+          data[category.category] = {
+            name: category.category,
+            value: 1,
+            fill: this.color(colorIdx)
+          };
+          colorIdx++;
+        }
+      });
+
+      return Object.values(data);
+
+        // return [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
+        // { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
     }
+
+    color(idx) {
+      const colors = ["#0088FE", "#8884D8", "#00C49F", "#FFBB28"];
+      return colors[idx % colors.length];
+
+      // RANDOM COLOR
+      // const values = "0123456789ABCDEF";
+      // let color = "";
+      // for(let i = 0; i < 6; i++) {
+      //   color += values[Math.floor(Math.random() * values.length)];
+      // }
+      // return "#" + color;
+    }
+
     render() {
         // const data = [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
         // { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
@@ -36,7 +83,7 @@ class Dashboard extends React.Component {
         const renderActiveShape = (props) => {
             const RADIAN = Math.PI / 180;
             const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-                fill, payload, percent, value } = props;
+                fill, payload, percent, value, name } = props;
             const sin = Math.sin(-RADIAN * midAngle);
             const cos = Math.cos(-RADIAN * midAngle);
             const sx = cx + (outerRadius + 10) * cos;
@@ -70,9 +117,9 @@ class Dashboard extends React.Component {
                     />
                     <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
                     <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-                    <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`PV ${value}`}</text>
+                    <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${name}`}</text>
                     <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-                        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+                        {`${(percent * 100).toFixed(2)}%`}
                     </text>
                 </g>
             );
@@ -97,13 +144,13 @@ class Dashboard extends React.Component {
                      </Button>
                 </div>
                 <div className="dashboard-date">
-                    <Button variant="outlined" color="primary" >
+                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: true, month: false, year: false })}>
                         Day
                     </Button>
-                    <Button variant="outlined" color="primary" >
+                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: false, month: true, year: false })} >
                         Month
                     </Button>
-                    <Button variant="outlined" color="primary" >
+                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: false, month: false, year: true })} >
                         Year
                     </Button>
                 </div>
@@ -120,6 +167,7 @@ class Dashboard extends React.Component {
                         outerRadius={200}
                         fill="#8884d8"
                         onMouseEnter={this.onPieEnter}
+                        dataKey="value"
                     />
                 </PieChart>
                 </div>

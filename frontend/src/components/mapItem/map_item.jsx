@@ -6,7 +6,7 @@ export class MapItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      locations: [],
+      locations: Object.values(props.locations),
       showingInfoWindow: {},
       activeMarker: {},
       clicked: false,
@@ -21,13 +21,6 @@ export class MapItem extends React.Component {
     this.closeLocationPopup = this.closeLocationPopup.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount(){
-    this.props.fetchLocations()
-      .then(res => { 
-        if(res.payload.data) this.setState({ locations: Object.values(res.payload.data)});
-      });
   }
 
   toggleClick() {
@@ -81,14 +74,20 @@ export class MapItem extends React.Component {
       name: this.state.locationName,
       latitude: this.state.latLong.lat,
       longitude: this.state.latLong.lng
-    })
-      .then(payload => {
+    }).then(payload => {
         this.props.createCategory({
           category: this.state.locationCategory,
           userId: this.props.currentUserId,
           locationId: payload.location.data._id
         });
         this.setState({ showPopup: false, clicked: !this.state.clicked });
+        return payload;
+      }).then(payload => {
+        this.props.createTime({
+          duration: 0,
+          locationId: payload.location.data._id,
+          userId: this.props.currentUserId
+        });
       });
   }
 

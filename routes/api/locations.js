@@ -52,7 +52,6 @@ router.get('/', (req, res) => {
           email: 'This location does not exist'
         });
       } else {
-        console.log(payload);
         let locations = {};
         payload.forEach(location => {
           locations[location._id] = location;

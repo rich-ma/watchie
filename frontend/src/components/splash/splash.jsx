@@ -11,7 +11,9 @@ class splash extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.loginUser(demoUser)
-      .then(() => this.props.fetchLocations());
+      .then(() => this.props.fetchLocations())
+      .then(() => this.props.fetchCategories())
+      .then(() => this.props.fetchTimes());
   }
 
   render() {
