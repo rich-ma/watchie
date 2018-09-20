@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import registerServiceWorker from '../../registerServiceWorker';
 import Button from '@material-ui/core/Button';
 import { PieChart, Pie, Sector } from 'recharts';
+import TextField from '@material-ui/core/TextField';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -135,23 +136,43 @@ class Dashboard extends React.Component {
             );
         };
 
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = (currentDate.getMonth() + 1) < 10 ? "0" + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1;
+        const day = currentDate.getDate() < 10 ? "0" + currentDate.getDate() : currentDate.getDate();
 
         return (
             <div className="dashboard">
                 <h1>This is the dashboard</h1>
                 <br />
                 <div className="dashboard-fromto">
-                    <Button variant="outlined" color="primary" >
-                        From
-                    </Button>
+                    <form noValidate>
+                      <TextField
+                        id="date"
+                        label="From"
+                        type="date"
+                        defaultValue={`${year}-${month}-${day}`}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </form>
                     <Link className="Link" to="/map">
                         <Button variant="outlined" color="secondary" >
                             MAP
                         </Button>
                     </Link>
-                    <Button variant="outlined" color="primary" >
-                        To
-                     </Button>
+                    <form noValidate>
+                      <TextField
+                        id="date"
+                        label="To"
+                        type="date"
+                        defaultValue={`${year}-${month}-${day}`}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </form>
                 </div>
                 <div className="dashboard-date">
                     <Button variant="outlined" color="primary"
