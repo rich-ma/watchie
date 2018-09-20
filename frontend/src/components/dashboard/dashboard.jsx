@@ -12,9 +12,13 @@ class Dashboard extends React.Component {
             activeIndex: 0,
             day: false,
             month: false,
-            year: false
-        }
+            year: false,
+            fromto: false,
+            from: this.currentDate(),
+            to: this.currentDate()
+        };
         this.onPieEnter = this.onPieEnter.bind(this);
+        this.handleFromToInput = this.handleFromToInput.bind(this);
     }
 
     componentWillReceiveProps(nextProps) { }
@@ -33,17 +37,21 @@ class Dashboard extends React.Component {
       const data = {};
       let colorIdx = 0;
 
+      const that = this;
       const currentDate = new Date;
 
       this.props.categories.forEach(category => {
         const categoryDate = new Date(category.date);
 
-        if (this.state.day) {
+        if (that.state.day) {
           if (categoryDate.getDay() !== currentDate.getDay()) return;
-        } else if (this.state.month) {
+        } else if (that.state.month) {
           if (categoryDate.getMonth() !== currentDate.getMonth()) return;
-        } else if (this.state.year) {
+        } else if (that.state.year) {
           if (categoryDate.getFullYear() !== currentDate.getFullYear()) return;
+        } else if (that.state.fromto) {
+          if (categoryDate.getTime() < new Date(that.state.from).getTime()) return;
+          if (categoryDate.getTime() > new Date(that.state.to).getTime()) return;
         }
 
         if (data[category.category]) {
@@ -52,7 +60,7 @@ class Dashboard extends React.Component {
           data[category.category] = {
             name: category.category,
             value: 1,
-            fill: this.color(colorIdx)
+            fill: that.color(colorIdx)
           };
           colorIdx++;
         }
@@ -85,6 +93,21 @@ class Dashboard extends React.Component {
       } else {
         return {};
       }
+    }
+
+    handleFromToInput(type) {
+      return e => {
+        this.setState({ day: false, month: false, year: false, fromto: true, [type]: e.target.value });
+      };
+    }
+
+    currentDate() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = (currentDate.getMonth() + 1) < 10 ? "0" + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1;
+      const day = currentDate.getDate() < 10 ? "0" + currentDate.getDate() : currentDate.getDate();
+
+      return `${year}-${month}-${day}`;
     }
 
     render() {
@@ -136,11 +159,6 @@ class Dashboard extends React.Component {
             );
         };
 
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = (currentDate.getMonth() + 1) < 10 ? "0" + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1;
-        const day = currentDate.getDate() < 10 ? "0" + currentDate.getDate() : currentDate.getDate();
-
         return (
             <div className="dashboard">
                 <h1>This is the dashboard</h1>
@@ -151,10 +169,11 @@ class Dashboard extends React.Component {
                         id="date"
                         label="From"
                         type="date"
-                        defaultValue={`${year}-${month}-${day}`}
+                        defaultValue={this.currentDate()}
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        onChange={this.handleFromToInput("from")}
                       />
                     </form>
                     <Link className="Link" to="/map">
@@ -167,27 +186,28 @@ class Dashboard extends React.Component {
                         id="date"
                         label="To"
                         type="date"
-                        defaultValue={`${year}-${month}-${day}`}
+                        defaultValue={this.currentDate()}
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        onChange={this.handleFromToInput("to")}
                       />
                     </form>
                 </div>
                 <div className="dashboard-date">
                     <Button variant="outlined" color="primary"
                     style={this.dashboardActive("day")}
-                    onClick={() => this.setState({ day: true, month: false, year: false })}>
+                    onClick={() => this.setState({ day: true, month: false, year: false, fromto: false })}>
                         Day
                     </Button>
                     <Button variant="outlined" color="primary"
                     style={this.dashboardActive("month")}
-                    onClick={() => this.setState({ day: false, month: true, year: false })} >
+                    onClick={() => this.setState({ day: false, month: true, year: false, fromto: false })} >
                         Month
                     </Button>
                     <Button variant="outlined" color="primary"
                     style={this.dashboardActive("year")}
-                    onClick={() => this.setState({ day: false, month: false, year: true })} >
+                    onClick={() => this.setState({ day: false, month: false, year: true, fromto: false })} >
                         Year
                     </Button>
                 </div>
