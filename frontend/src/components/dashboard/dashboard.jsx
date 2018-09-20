@@ -76,6 +76,16 @@ class Dashboard extends React.Component {
       // return "#" + color;
     }
 
+    dashboardActive(type) {
+      if (this.state[type]) {
+        return {
+          background: "rgba(188, 195, 227, 1)"
+        };
+      } else {
+        return {};
+      }
+    }
+
     render() {
         // const data = [{ name: 'Group A', value: 400, fill: '#0088FE' }, { name: 'Group B', value: 300 },
         // { name: 'Group C', value: 300, fill: '#00C49F' }, { name: 'Group D', value: 200, fill: '#FFBB28' }];
@@ -144,13 +154,19 @@ class Dashboard extends React.Component {
                      </Button>
                 </div>
                 <div className="dashboard-date">
-                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: true, month: false, year: false })}>
+                    <Button variant="outlined" color="primary"
+                    style={this.dashboardActive("day")}
+                    onClick={() => this.setState({ day: true, month: false, year: false })}>
                         Day
                     </Button>
-                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: false, month: true, year: false })} >
+                    <Button variant="outlined" color="primary"
+                    style={this.dashboardActive("month")}
+                    onClick={() => this.setState({ day: false, month: true, year: false })} >
                         Month
                     </Button>
-                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: false, month: false, year: true })} >
+                    <Button variant="outlined" color="primary"
+                    style={this.dashboardActive("year")}
+                    onClick={() => this.setState({ day: false, month: false, year: true })} >
                         Year
                     </Button>
                 </div>
