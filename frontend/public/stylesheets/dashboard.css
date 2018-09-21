@@ -1,25 +1,26 @@
 .dashboard {
-    height: 100vh;
+  padding-top: 75px;
+  height: 100%;
 }
 .dashboard-fromto {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 10vw;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 10vw;
 }
 .dashboard-date {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 10vw;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 10vw;
 }
 .dashboard img {
-    margin: 5px 10vw;
-    width: 80vw;
+  margin: 5px 10vw;
+  width: 80vw;
 }
 .dashboard-chart {
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
 }
 .dashboard-chart *{
-    width: 100%;
+  width: 100%;
 }

@@ -161,8 +161,6 @@ class Dashboard extends React.Component {
 
         return (
             <div className="dashboard">
-                <h1>This is the dashboard</h1>
-                <br />
                 <div className="dashboard-fromto">
                     <form noValidate>
                       <TextField
@@ -176,11 +174,6 @@ class Dashboard extends React.Component {
                         onChange={this.handleFromToInput("from")}
                       />
                     </form>
-                    <Link className="Link" to="/map">
-                        <Button variant="outlined" color="secondary" >
-                            MAP
-                        </Button>
-                    </Link>
                     <form noValidate>
                       <TextField
                         id="date"
