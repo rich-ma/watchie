@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import registerServiceWorker from '../../registerServiceWorker';
 import Button from '@material-ui/core/Button';
 import { PieChart, Pie, Sector } from 'recharts';
+import TextField from '@material-ui/core/TextField';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -11,9 +12,13 @@ class Dashboard extends React.Component {
             activeIndex: 0,
             day: false,
             month: false,
-            year: false
-        }
+            year: false,
+            fromto: false,
+            from: this.currentDate(),
+            to: this.currentDate()
+        };
         this.onPieEnter = this.onPieEnter.bind(this);
+        this.handleFromToInput = this.handleFromToInput.bind(this);
     }
 
     componentWillReceiveProps(nextProps) { }
@@ -32,17 +37,21 @@ class Dashboard extends React.Component {
       const data = {};
       let colorIdx = 0;
 
+      const that = this;
       const currentDate = new Date;
 
       this.props.categories.forEach(category => {
         const categoryDate = new Date(category.date);
 
-        if (this.state.day) {
+        if (that.state.day) {
           if (categoryDate.getDay() !== currentDate.getDay()) return;
-        } else if (this.state.month) {
+        } else if (that.state.month) {
           if (categoryDate.getMonth() !== currentDate.getMonth()) return;
-        } else if (this.state.year) {
+        } else if (that.state.year) {
           if (categoryDate.getFullYear() !== currentDate.getFullYear()) return;
+        } else if (that.state.fromto) {
+          if (categoryDate.getTime() < new Date(that.state.from).getTime()) return;
+          if (categoryDate.getTime() > new Date(that.state.to).getTime()) return;
         }
 
         if (data[category.category]) {
@@ -51,7 +60,7 @@ class Dashboard extends React.Component {
           data[category.category] = {
             name: category.category,
             value: 1,
-            fill: this.color(colorIdx)
+            fill: that.color(colorIdx)
           };
           colorIdx++;
         }
@@ -64,7 +73,7 @@ class Dashboard extends React.Component {
     }
 
     color(idx) {
-      const colors = ["#0088FE", "#8884D8", "#00C49F", "#FFBB28"];
+      const colors = ["rgba(0,136,254,1)", "rgba(136,132,216,1)", "rgba(0,196,159,1)", "rgba(255,187,40,1)", "rgba(255,56,56,1)", "rgba(0,136,254,0.7)", "rgba(136,132,216,0.7)", "rgba(0,196,159,0.7)", "rgba(255,187,40,0.7)", "rgba(255,56,56,0.7)"];
       return colors[idx % colors.length];
 
       // RANDOM COLOR
@@ -74,6 +83,31 @@ class Dashboard extends React.Component {
       //   color += values[Math.floor(Math.random() * values.length)];
       // }
       // return "#" + color;
+    }
+
+    dashboardActive(type) {
+      if (this.state[type]) {
+        return {
+          background: "rgba(188, 195, 227, 1)"
+        };
+      } else {
+        return {};
+      }
+    }
+
+    handleFromToInput(type) {
+      return e => {
+        this.setState({ day: false, month: false, year: false, fromto: true, [type]: e.target.value });
+      };
+    }
+
+    currentDate() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = (currentDate.getMonth() + 1) < 10 ? "0" + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1;
+      const day = currentDate.getDate() < 10 ? "0" + currentDate.getDate() : currentDate.getDate();
+
+      return `${year}-${month}-${day}`;
     }
 
     render() {
@@ -125,32 +159,48 @@ class Dashboard extends React.Component {
             );
         };
 
-
         return (
             <div className="dashboard">
-                <h1>This is the dashboard</h1>
-                <br />
                 <div className="dashboard-fromto">
-                    <Button variant="outlined" color="primary" >
-                        From
-                    </Button>
-                    <Link className="Link" to="/map">
-                        <Button variant="outlined" color="secondary" >
-                            MAP
-                        </Button>
-                    </Link>
-                    <Button variant="outlined" color="primary" >
-                        To
-                     </Button>
+                    <form noValidate>
+                      <TextField
+                        id="date"
+                        label="From"
+                        type="date"
+                        defaultValue={this.currentDate()}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={this.handleFromToInput("from")}
+                      />
+                    </form>
+                    <form noValidate>
+                      <TextField
+                        id="date"
+                        label="To"
+                        type="date"
+                        defaultValue={this.currentDate()}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={this.handleFromToInput("to")}
+                      />
+                    </form>
                 </div>
                 <div className="dashboard-date">
-                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: true, month: false, year: false })}>
+                    <Button variant="outlined" color="primary"
+                    style={this.dashboardActive("day")}
+                    onClick={() => this.setState({ day: true, month: false, year: false, fromto: false })}>
                         Day
                     </Button>
-                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: false, month: true, year: false })} >
+                    <Button variant="outlined" color="primary"
+                    style={this.dashboardActive("month")}
+                    onClick={() => this.setState({ day: false, month: true, year: false, fromto: false })} >
                         Month
                     </Button>
-                    <Button variant="outlined" color="primary" onClick={() => this.setState({ day: false, month: false, year: true })} >
+                    <Button variant="outlined" color="primary"
+                    style={this.dashboardActive("year")}
+                    onClick={() => this.setState({ day: false, month: false, year: true, fromto: false })} >
                         Year
                     </Button>
                 </div>
