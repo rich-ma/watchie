@@ -1,5 +1,7 @@
 # Watchie
 
+[Live](http://watchie.herokuapp.com)
+
 ## Group Members
 **Steven Lum, Richard Ma, Nigel Rodrigues**
  
